@@ -1,6 +1,6 @@
 package br.com.ecosolucoes.ecotroca;
 
-public class Administrador extends Usuario {
+public class Administrador extends Pessoa {
     public void insereUsuario() {
         
     }
