@@ -11,4 +11,11 @@
         <maven.compiler.target>19</maven.compiler.target>
         <exec.mainClass>br.com.ecosolucoes.ecotroca.EcoTroca</exec.mainClass>
     </properties>
+    <dependencies> 
+        <dependency> 
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.19</version>
+        </dependency>
+    </dependencies>
 </project>
