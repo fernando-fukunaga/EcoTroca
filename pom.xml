@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
-        <exec.mainClass>br.com.ecosolucoes.ecotroca.EcoTroca</exec.mainClass>
+        <exec.mainClass>br.com.ecosolucoes.ecotroca.TestePessoa</exec.mainClass>
     </properties>
     <dependencies> 
         <dependency> 

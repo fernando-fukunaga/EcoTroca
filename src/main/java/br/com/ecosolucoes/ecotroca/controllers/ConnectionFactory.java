@@ -1,4 +1,4 @@
-package br.com.ecosolucoes.ecotroca;
+package br.com.ecosolucoes.ecotroca.controllers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

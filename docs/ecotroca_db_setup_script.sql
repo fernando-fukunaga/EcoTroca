@@ -48,7 +48,7 @@ constraint fk_cidadao_id_pessoa foreign key (id_pessoa) references pessoa(id)
 create table material(
 id int primary key auto_increment,
 tipo_material varchar(15) not null,
-pontuacao_material int not null
+pontuacao_material_por_kg decimal(10,2) not null
 );
 
 create table descarte(
@@ -57,7 +57,7 @@ id_cidadao int not null,
 id_usuario int not null,
 data_hora_descarte datetime not null default current_timestamp,
 peso_total_descarte decimal(10,3) not null,
-total_pontos_gerados int not null,
+total_pontos_gerados decimal(10,2) not null,
 constraint fk_descarte_id_cidadao foreign key (id_cidadao) references cidadao(id),
 constraint fk_descarte_id_usuario foreign key (id_usuario) references usuario(id)
 );
@@ -66,7 +66,7 @@ create table material_descarte(
 id_descarte int not null,
 id_material int not null,
 peso_descartado decimal(10,3) not null,
-pontos_gerados int not null,
+pontos_gerados decimal(10,2) not null,
 constraint fk_material_descarte_id_descarte foreign key (id_descarte) references descarte(id),
 constraint fk_material_descarte_id_material foreign key (id_material) references material(id)
 );
