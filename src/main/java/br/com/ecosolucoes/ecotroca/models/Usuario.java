@@ -2,8 +2,8 @@ package br.com.ecosolucoes.ecotroca.models;
 
 public class Usuario {
     public enum Perfil {
-        ADMIN,
-        FUNCIONARIO
+        admin,
+        funcionario
     }
     
     private int id;
