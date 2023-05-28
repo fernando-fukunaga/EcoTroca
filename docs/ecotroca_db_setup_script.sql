@@ -41,7 +41,7 @@ insert into usuario(id_pessoa,login,senha,perfil_acesso) values(
 create table cidadao(
 id int primary key auto_increment,
 id_pessoa int not null,
-saldo_pontuacao bigint not null default 0,
+saldo_pontuacao decimal(10,2) not null default 0,
 constraint fk_cidadao_id_pessoa foreign key (id_pessoa) references pessoa(id)
 );
 
