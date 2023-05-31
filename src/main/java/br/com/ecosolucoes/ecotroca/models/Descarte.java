@@ -1,13 +1,13 @@
 package br.com.ecosolucoes.ecotroca.models;
-import java.time.LocalDate;
 
+import java.time.LocalDateTime;
 
 public class Descarte {
     
     private int id;
     private int idCidadao;
     private int idUsuario;
-    private LocalDate dataHoraDescarte;
+    private LocalDateTime dataHoraDescarte;
     private double pesoTotalDescarte;
     private double totalPontosGerados;
 
@@ -35,11 +35,11 @@ public class Descarte {
         this.idUsuario = idUsuario;
     }
 
-    public LocalDate getDataHoraDescarte() {
+    public LocalDateTime getDataHoraDescarte() {
         return dataHoraDescarte;
     }
 
-    public void setDataHoraDescarte(LocalDate dataHoraDescarte) {
+    public void setDataHoraDescarte(LocalDateTime dataHoraDescarte) {
         this.dataHoraDescarte = dataHoraDescarte;
     }
 

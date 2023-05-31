@@ -86,4 +86,28 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
+    
+    public static boolean tentarLogin(String login, String senha) {
+        String sql = "select * from usuario where login = ? and senha = ?";
+        ConnectionFactory factory = new ConnectionFactory();
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, login);
+            ps.setString(2, senha);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Bem vindo!");
+                return true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Login inválido");
+                return false;
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return false;
+    }    
 }

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author fanna
  */
 public class PessoaDAO {   
-    ConnectionFactory factory = new ConnectionFactory(); // criando uma factory de conexão com o banco
+    static ConnectionFactory factory = new ConnectionFactory(); // criando uma factory de conexão com o banco
     
     // Métodos de CRUD:
     
@@ -47,7 +47,7 @@ public class PessoaDAO {
         }
     }
     
-    public Pessoa readPessoa(int id) {
+    public static Pessoa readPessoa(int id) {
         String sql = "select * from pessoa where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);

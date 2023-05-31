@@ -1,11 +1,6 @@
 package br.com.ecosolucoes.ecotroca.models;
 
-import br.com.ecosolucoes.ecotroca.models.dao.ConnectionFactory; //importando classe se conexão com o banco
 import java.sql.Date; // essa importação é para usarmos o tipo de variável DATA
-import java.sql.Connection; // modulo do sql para fazer uma conexão com o banco
-import java.sql.PreparedStatement; // módulo que prepara um comando SQL para ser executado quando você mandar
-import java.sql.ResultSet; // módulo que é usado para trabalhar com resultados de pesquisas no banco usando o SELECT
-import javax.swing.JOptionPane; // JOptionPane para imprimir o SELECT
 
 public class Pessoa {
     /* Definindo os atributos da classe, a classe não terá método construtor pois ele irá atrapalhar na hora de fazer as operações CRUD,

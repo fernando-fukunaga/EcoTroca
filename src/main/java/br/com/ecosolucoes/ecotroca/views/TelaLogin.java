@@ -4,7 +4,7 @@
  */
 package br.com.ecosolucoes.ecotroca.views;
 
-import br.com.ecosolucoes.ecotroca.controllers.UsuarioControllers;
+import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 import br.com.ecosolucoes.ecotroca.models.dao.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -114,7 +114,11 @@ public class TelaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String login = loginTextField.getText();
         String senha = new String(senhaPasswordField.getPassword());
-        UsuarioControllers.tentarLogin(login, senha);
+        if (UsuarioDAO.tentarLogin(login, senha)) {
+            TelaHome th = new TelaHome();
+            th.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_entrarButtonActionPerformed
 
     /**
