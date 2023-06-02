@@ -8,17 +8,16 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
-    ConnectionFactory factory = new ConnectionFactory();
+    static ConnectionFactory factory = new ConnectionFactory();
     
-    public void createUsuario(Usuario usuario) {
-        String sql = "insert into usuario (id,id_pessoa,login,senha,perfil_acesso) values (?,?,?,?,?)";
+    public static void createUsuario(Usuario usuario) {
+        String sql = "insert into usuario (id_pessoa,login,senha,perfil_acesso) values (?,?,?,?)";
         try (Connection conn = factory.obterConexao()) {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1,usuario.getId());
-            ps.setInt(2,usuario.getIdPessoa());
-            ps.setString(3, usuario.getLogin());
-            ps.setString(4, usuario.getSenha());
-            ps.setString(5, usuario.getPerfilAcesso().name());
+            PreparedStatement ps = conn.prepareStatement(sql);;
+            ps.setInt(1,usuario.getIdPessoa());
+            ps.setString(2, usuario.getLogin());
+            ps.setString(3, usuario.getSenha());
+            ps.setString(4, usuario.getPerfilAcesso().name());
             ps.execute();
             JOptionPane.showMessageDialog(null,"Usuário criado com sucesso! ID do usuário: "+usuario.getId());
         }
@@ -28,7 +27,7 @@ public class UsuarioDAO {
         }
     }
     
-    public Usuario readUsuario(int id) {
+    public static Usuario readUsuario(int id) {
         String sql = "select * from usuario where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -56,7 +55,7 @@ public class UsuarioDAO {
         return null;
     }
     
-    public void updateUsuario(Usuario usuario) {
+    public static void updateUsuario(Usuario usuario) {
         String sql = "update usuario set login = ?, senha = ?, perfil_acesso = ? where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -73,7 +72,7 @@ public class UsuarioDAO {
         }
     }
     
-    public void deleteUsuario(int id) {
+    public static void deleteUsuario(int id) {
         String sql = "delete from usuario where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);

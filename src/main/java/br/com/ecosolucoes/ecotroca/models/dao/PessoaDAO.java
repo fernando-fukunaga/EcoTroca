@@ -21,7 +21,7 @@ public class PessoaDAO {
     // Métodos de CRUD:
     
     // Método para inserir nova pessoa no banco
-    public void createPessoa(Pessoa pessoa) {
+    public static void createPessoa(Pessoa pessoa) {
         String sql = "insert into pessoa(nome,sobrenome,email,data_nascimento,endereco,telefone,cpf) values(?,?,?,?,?,?,?)"; //criando uma string de base com o comando sql e variáveis nos valores
         
         //Tentar a inserção, passando a conexão com o banco como parâmetro
@@ -80,7 +80,7 @@ public class PessoaDAO {
         return null;
     }
     
-    public void updatePessoa(Pessoa pessoa) {
+    public static void updatePessoa(Pessoa pessoa) {
         String sql = "update pessoa set nome = ?, sobrenome = ?, email = ?, data_nascimento = ?, endereco = ?, telefone = ?, cpf = ? where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -100,7 +100,7 @@ public class PessoaDAO {
         }
     }
     
-    public void deletePessoa(int id) {
+    public static void deletePessoa(int id) {
         String sql = "delete from pessoa where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);

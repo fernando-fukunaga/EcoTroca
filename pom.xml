@@ -24,10 +24,5 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.19</version>
         </dependency>
-        <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
-        </dependency>
     </dependencies>
 </project>
