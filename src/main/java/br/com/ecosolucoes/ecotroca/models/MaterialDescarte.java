@@ -4,7 +4,7 @@ public class MaterialDescarte {
    private int id;
    private int idMaterial;
    private double pesoDescartado;
-   private int pontosGerados;
+   private double pontosGerados;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class MaterialDescarte {
         this.pesoDescartado = pesoDescartado;
     }
 
-    public int getPontosGerados() {
+    public double getPontosGerados() {
         return pontosGerados;
     }
 
-    public void setPontosGerados(int pontosGerados) {
+    public void setPontosGerados(double pontosGerados) {
         this.pontosGerados = pontosGerados;
     }
    
