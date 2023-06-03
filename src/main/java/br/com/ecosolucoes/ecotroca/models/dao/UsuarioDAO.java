@@ -11,13 +11,14 @@ public class UsuarioDAO {
     static ConnectionFactory factory = new ConnectionFactory();
     
     public static void createUsuario(Usuario usuario) {
-        String sql = "insert into usuario (id_pessoa,login,senha,perfil_acesso) values (?,?,?,?)";
+        String sql = "insert into usuario (id_pessoa,login,senha,perfil_acesso,usuario_ativo) values (?,?,?,?,?)";
         try (Connection conn = factory.obterConexao()) {
-            PreparedStatement ps = conn.prepareStatement(sql);;
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,usuario.getIdPessoa());
             ps.setString(2, usuario.getLogin());
             ps.setString(3, usuario.getSenha());
             ps.setString(4, usuario.getPerfilAcesso().name());
+            ps.setBoolean(5, usuario.isUsuarioAtivo());
             ps.execute();
             JOptionPane.showMessageDialog(null,"Usuário criado com sucesso! ID do usuário: "+usuario.getId());
         }
@@ -39,9 +40,10 @@ public class UsuarioDAO {
                 String senha = rs.getString("senha");
                 String strPerfilAcesso = rs.getString("perfil_acesso");
                 Perfil perfilAcesso = Perfil.valueOf(strPerfilAcesso);
+                boolean usuarioAtivo = rs.getBoolean("usuario_ativo");
                 Usuario usuario = new Usuario();
                 usuario.setId(id); usuario.setIdPessoa(idPessoa); usuario.setLogin(login); usuario.setSenha(senha);
-                usuario.setPerfilAcesso(perfilAcesso);
+                usuario.setPerfilAcesso(perfilAcesso); usuario.setUsuarioAtivo(usuarioAtivo);
                 return usuario;
             }
             else {
@@ -56,13 +58,14 @@ public class UsuarioDAO {
     }
     
     public static void updateUsuario(Usuario usuario) {
-        String sql = "update usuario set login = ?, senha = ?, perfil_acesso = ? where id = ?";
+        String sql = "update usuario set login = ?, senha = ?, perfil_acesso = ?, usuario_ativo = ? where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, usuario.getLogin());
             ps.setString(2, usuario.getSenha());
             ps.setString(3, usuario.getPerfilAcesso().name());
-            ps.setInt(4, usuario.getId());
+            ps.setBoolean(4,usuario.isUsuarioAtivo());
+            ps.setInt(5, usuario.getId());
             ps.execute();
             JOptionPane.showMessageDialog(null,"Usuário atualizado com sucesso!");
         }

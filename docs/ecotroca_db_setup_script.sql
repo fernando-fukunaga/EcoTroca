@@ -28,6 +28,7 @@ id_pessoa int not null,
 login varchar(11) not null unique,
 senha varchar(100) not null,
 perfil_acesso enum('admin', 'funcionario') not null,
+usuario_ativo boolean not null default false,
 constraint fk_usuario_id_pessoa foreign key (id_pessoa) references pessoa(id)
 );
 
