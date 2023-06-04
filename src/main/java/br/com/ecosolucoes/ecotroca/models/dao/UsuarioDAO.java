@@ -1,11 +1,14 @@
 package br.com.ecosolucoes.ecotroca.models.dao;
 
+import br.com.ecosolucoes.ecotroca.models.Pessoa;
 import br.com.ecosolucoes.ecotroca.models.Usuario;
 import br.com.ecosolucoes.ecotroca.models.Usuario.Perfil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class UsuarioDAO {
     static ConnectionFactory factory = new ConnectionFactory();
@@ -130,5 +133,39 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
         return false;
-    }     
+    }
+    
+    public static ArrayList listarUsuariosParaTabela() {
+        String sql = "select * from usuario";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Object[]> objetos = new ArrayList<>();
+            while (rs.next()) {
+                int idPessoa = rs.getInt("id_pessoa");
+                Pessoa pessoa = PessoaDAO.readPessoa(idPessoa);
+                String login = rs.getString("login");
+                String nomeCompleto = pessoa.getNome() + " " + pessoa.getSobrenome();
+                String email = pessoa.getEmail();
+                String perfilAcesso = rs.getString("perfil_acesso");
+                int idUsuario = rs.getInt("id");  
+                boolean usuarioAtivo = rs.getBoolean("usuario_ativo");
+                String strUsuarioAtivo;
+                if (usuarioAtivo == true) {
+                    strUsuarioAtivo = "Sim";
+                }
+                else {
+                    strUsuarioAtivo = "Não";
+                }
+                Object[] newRowData = {login, nomeCompleto, email, perfilAcesso, idUsuario, strUsuarioAtivo};
+                objetos.add(newRowData);                
+            }
+            return objetos;
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -1,13 +1,7 @@
 package br.com.ecosolucoes.ecotroca.views;
 
-import br.com.ecosolucoes.ecotroca.models.Pessoa;
-import br.com.ecosolucoes.ecotroca.models.Usuario;
-import br.com.ecosolucoes.ecotroca.models.dao.ConnectionFactory;
-import br.com.ecosolucoes.ecotroca.models.dao.PessoaDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
+import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
+import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -18,27 +12,11 @@ public class TelaGerenciamentoUsuarios extends javax.swing.JFrame {
         super("Gerenciar usuários");
         initComponents();
         setLocationRelativeTo(null);
-        ConnectionFactory factory = new ConnectionFactory();
-        String sql = "select * from usuario where usuario_ativo = true";
-        try (Connection conn = factory.obterConexao()) {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int idPessoa = rs.getInt("id_pessoa");
-                Pessoa pessoa = PessoaDAO.readPessoa(idPessoa);
-                String login = rs.getString("login");
-                String nomeCompleto = pessoa.getNome() + " " + pessoa.getSobrenome();
-                String email = pessoa.getEmail();
-                String perfilAcesso = rs.getString("perfil_acesso");
-                int idUsuario = rs.getInt("id");
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                Object[] newRowData = {login, nomeCompleto, email, perfilAcesso, idUsuario};
-                model.addRow(newRowData);                
-            }
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
-            e.printStackTrace();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        ArrayList<Object[]> objetos;
+        objetos = UsuarioDAO.listarUsuariosParaTabela();
+        for (Object[] objeto : objetos) {
+            model.addRow(objeto);
         }
         
         // Criar um DefaultTableCellRenderer personalizado
@@ -46,6 +24,7 @@ public class TelaGerenciamentoUsuarios extends javax.swing.JFrame {
         centerRenderer.setHorizontalAlignment(SwingConstants.LEFT);
         // Aplicar o renderer à coluna desejada (por exemplo, a primeira coluna)
         jTable1.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
     }
 
     /**
@@ -57,13 +36,15 @@ public class TelaGerenciamentoUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        criarUsuarioButton = new javax.swing.JButton();
-        pesquisarUsuarioButton = new javax.swing.JButton();
-        editarUsuarioButton = new javax.swing.JButton();
-        excluirUsuarioButton = new javax.swing.JButton();
         voltarButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,14 +53,14 @@ public class TelaGerenciamentoUsuarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Login Usuário", "Nome Completo", "E-mail", "Perfil Acesso", "Id Usuario"
+                "Login Usuário", "Nome Completo", "E-mail", "Perfil Acesso", "Id Usuario", "Usuario Ativo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -92,14 +73,6 @@ public class TelaGerenciamentoUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        criarUsuarioButton.setText("Criar Usuário");
-
-        pesquisarUsuarioButton.setText("Pesquisar Usuário");
-
-        editarUsuarioButton.setText("Editar Usuário");
-
-        excluirUsuarioButton.setText("Excluir Usuário");
-
         voltarButton.setText("Voltar");
         voltarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,48 +80,64 @@ public class TelaGerenciamentoUsuarios extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Ativar ou desativar usuários");
+
+        jButton3.setText("Buscar usuário por ID");
+
+        jButton4.setText("Buscar usuário por login");
+
+        jButton5.setText("Alterar perfil de acesso de usuário");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jScrollPane2.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(criarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pesquisarUsuarioButton)
-                        .addGap(46, 46, 46)
-                        .addComponent(editarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(excluirUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(criarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(excluirUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(editarUsuarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -197,12 +186,14 @@ public class TelaGerenciamentoUsuarios extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton criarUsuarioButton;
-    private javax.swing.JButton editarUsuarioButton;
-    private javax.swing.JButton excluirUsuarioButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton pesquisarUsuarioButton;
     private javax.swing.JButton voltarButton;
     // End of variables declaration//GEN-END:variables
 }
