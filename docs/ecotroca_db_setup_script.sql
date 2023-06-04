@@ -1,4 +1,4 @@
-cidadaocidadaousuariocreate database ecotroca;
+create database ecotroca;
 
 use ecotroca;
 

@@ -14,11 +14,7 @@ public class UsuarioDAO {
     static ConnectionFactory factory = new ConnectionFactory();
     
     public static void createUsuario(Usuario usuario) {
-<<<<<<< HEAD
-        String sql = "insert into usuario (id,id_pessoa,login,senha,perfil_acesso) values (?,?,?,?,?)";
-=======
         String sql = "insert into usuario (id_pessoa,login,senha,perfil_acesso,usuario_ativo) values (?,?,?,?,?)";
->>>>>>> d594b2f69b1cf9c77dc546b81ed2e0200daff151
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,usuario.getIdPessoa());
