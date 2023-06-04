@@ -4,6 +4,14 @@
  */
 package br.com.ecosolucoes.ecotroca.views;
 
+import br.com.ecosolucoes.ecotroca.models.Pessoa;
+import br.com.ecosolucoes.ecotroca.models.Usuario;
+import br.com.ecosolucoes.ecotroca.models.Usuario.Perfil;
+import br.com.ecosolucoes.ecotroca.models.dao.PessoaDAO;
+import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
+import java.sql.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fanna
@@ -16,6 +24,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     public TelaCadastro() {
         super("Cadastro de usuários");
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -39,7 +48,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         diaTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        enderecoTextField = new javax.swing.JTextField();
         telefoneTextField = new javax.swing.JTextField();
         cpfTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -49,6 +57,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         voltarButton = new javax.swing.JButton();
         confirmarButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        enderecoTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,28 +74,14 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
-        emailTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         emailTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("E-mail *"));
 
-        mesTextField.setText("Mês");
-
-        anoTextField.setText("Ano");
-
         jLabel2.setText("/");
-
-        diaTextField.setText("Dia");
 
         jLabel3.setText("/");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Data de Nascimento *");
-
-        enderecoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço (max. 110 caracteres) *"));
-        enderecoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enderecoTextFieldActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Data de Nascimento (use o formtado dd/mm/aaaa) *");
 
         telefoneTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Telefone *"));
 
@@ -108,8 +104,23 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         voltarButton.setText("Voltar");
+        voltarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voltarButtonActionPerformed(evt);
+            }
+        });
 
         confirmarButton.setText("Confirmar");
+        confirmarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarButtonActionPerformed(evt);
+            }
+        });
+
+        enderecoTextArea.setColumns(20);
+        enderecoTextArea.setRows(5);
+        enderecoTextArea.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço (max. 110 caracteres) *"));
+        jScrollPane2.setViewportView(enderecoTextArea);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,10 +133,24 @@ public class TelaCadastro extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sobrenomeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(nomeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(telefoneTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(cpfTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(loginTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20))
+                            .addComponent(senhaPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(repitaSenhaPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(diaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -135,22 +160,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                                         .addGap(2, 2, 2)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(anoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(sobrenomeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addComponent(nomeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addComponent(emailTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addComponent(enderecoTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addComponent(telefoneTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addComponent(cpfTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addComponent(loginTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20))
-                                .addComponent(senhaPasswordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addComponent(repitaSenhaPasswordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                        .addComponent(anoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(40, 40, 40))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
@@ -179,7 +189,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(enderecoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(telefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -221,9 +231,53 @@ public class TelaCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sobrenomeTextFieldActionPerformed
 
-    private void enderecoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoTextFieldActionPerformed
+    private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_enderecoTextFieldActionPerformed
+        TelaLogin tl = new TelaLogin();
+        tl.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_voltarButtonActionPerformed
+
+    private void confirmarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarButtonActionPerformed
+        // TODO add your handling code here:
+        String nome = nomeTextField.getText();
+        String sobrenome = sobrenomeTextField.getText();
+        String email = emailTextField.getText();
+        String dia = diaTextField.getText();
+        String mes = mesTextField.getText();
+        String ano = anoTextField.getText();
+        String strDataNascimento = ano+"-"+mes+"-"+dia;
+        Date dataNascimento = Date.valueOf(strDataNascimento);
+        String endereco = enderecoTextArea.getText();
+        String telefone = telefoneTextField.getText();
+        String cpf = cpfTextField.getText();
+        Pessoa pessoa = new Pessoa(nome,sobrenome,email,dataNascimento,endereco,telefone,cpf);
+                
+        String login = loginTextField.getText();
+        String senha = new String(senhaPasswordField.getPassword());
+        String senhaRepetida = new String(repitaSenhaPasswordField.getPassword());
+        Perfil perfilAcesso = Perfil.valueOf("funcionario");        
+        
+        
+        if (PessoaDAO.checarDadosUnicosNaoRepetem(email, cpf)) {
+            if (UsuarioDAO.checarDadosUnicosNaoRepetem(login)) {
+                if (!senha.equals(senhaRepetida)) {
+                    JOptionPane.showMessageDialog(null, "As senhas inseridas não estão iguais!");
+                }
+                else {
+                    PessoaDAO.createPessoa(pessoa);
+                    Pessoa pessoaCriada = PessoaDAO.procurarPessoaPeloEmail(email);
+                    int idPessoaCriada = pessoaCriada.getId();
+                    Usuario usuario = new Usuario(idPessoaCriada,login,senha,perfilAcesso,false);
+                    UsuarioDAO.createUsuario(usuario);
+                }
+            }       
+        }
+        
+        TelaLogin tl = new TelaLogin();
+        tl.setVisible(true);
+        this.dispose();        
+    }//GEN-LAST:event_confirmarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,7 +321,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField cpfTextField;
     private javax.swing.JTextField diaTextField;
     private javax.swing.JTextField emailTextField;
-    private javax.swing.JTextField enderecoTextField;
+    private javax.swing.JTextArea enderecoTextArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -276,6 +330,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField loginTextField;
     private javax.swing.JTextField mesTextField;
     private javax.swing.JTextField nomeTextField;

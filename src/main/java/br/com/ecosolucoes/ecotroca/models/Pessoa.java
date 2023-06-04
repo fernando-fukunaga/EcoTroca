@@ -14,6 +14,16 @@ public class Pessoa {
     private String endereco;
     private String telefone;
     private String cpf;
+
+    public Pessoa(String nome, String sobrenome, String email, Date dataNascimento, String endereco, String telefone, String cpf) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.cpf = cpf;
+    }
     
     // Getters e Setters (o NetBeans os gera automaticamente!)
 

@@ -20,7 +20,7 @@ public class UsuarioDAO {
             ps.setString(4, usuario.getPerfilAcesso().name());
             ps.setBoolean(5, usuario.isUsuarioAtivo());
             ps.execute();
-            JOptionPane.showMessageDialog(null,"Usuário criado com sucesso! ID do usuário: "+usuario.getId());
+            JOptionPane.showMessageDialog(null,"Usuário solicitado com sucesso! Aguarde a aprovação de um administrador para acessar o sistema.");
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
@@ -41,9 +41,8 @@ public class UsuarioDAO {
                 String strPerfilAcesso = rs.getString("perfil_acesso");
                 Perfil perfilAcesso = Perfil.valueOf(strPerfilAcesso);
                 boolean usuarioAtivo = rs.getBoolean("usuario_ativo");
-                Usuario usuario = new Usuario();
-                usuario.setId(id); usuario.setIdPessoa(idPessoa); usuario.setLogin(login); usuario.setSenha(senha);
-                usuario.setPerfilAcesso(perfilAcesso); usuario.setUsuarioAtivo(usuarioAtivo);
+                Usuario usuario = new Usuario(idPessoa,login,senha,perfilAcesso,usuarioAtivo);
+                usuario.setId(id);
                 return usuario;
             }
             else {
@@ -90,7 +89,7 @@ public class UsuarioDAO {
     }
     
     public static boolean tentarLogin(String login, String senha) {
-        String sql = "select * from usuario where login = ? and senha = ?";
+        String sql = "select * from usuario where login = ? and senha = ? and usuario_ativo = true";
         ConnectionFactory factory = new ConnectionFactory();
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -102,7 +101,7 @@ public class UsuarioDAO {
                 return true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Login inválido");
+                JOptionPane.showMessageDialog(null, "Dados de login incorretos ou usuário inativo!");
                 return false;
             }
         }
@@ -111,5 +110,25 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
         return false;
-    }    
+    }
+
+    public static boolean checarDadosUnicosNaoRepetem(String login) {
+        String sql = "select * from usuario where login = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, login);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Já existe um usuário com este login cadastrado!");
+                return false;
+            }
+            return true;
+
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return false;
+    }     
 }
