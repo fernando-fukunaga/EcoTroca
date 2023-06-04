@@ -5,7 +5,7 @@
 package br.com.ecosolucoes.ecotroca.views;
 
 import java.awt.Color;
-import javax.swing.JPanel;
+import java.awt.Component;
 
 /**
  *
@@ -22,8 +22,26 @@ public class TelaHome extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         mainPanel.setVisible(true);
+        dashboardPanel.setVisible(false);
+        gerenciarDescartesPanel.setVisible(false);
+        gerenciarUsuariosPanel.setVisible(false);
+        gerenciarMateriaisPanel.setVisible(false);
+        minhaContaPanel.setVisible(false);        
     }
 
+    public void deixaTodosOsPanelsInvisiveis() {
+        Component[] arrayPanels = {dashboardPanel,gerenciarDescartesPanel,gerenciarUsuariosPanel,gerenciarMateriaisPanel,minhaContaPanel};
+        for (Component component : arrayPanels) {
+            component.setVisible(false);
+        }
+    }
+    
+    public void deixaTodosOsTogglesDoMenuNaCorPadrao() {
+        Component[] arrayToggles = {dashboardTogglePanel,gerenciarDescartesTogglePanel,gerenciarUsuariosTogglePanel,gerenciarMateriaisTogglePanel,minhaContaTogglePanel};
+        for (Component component : arrayToggles) {
+            component.setBackground(sideMenuPanel.getBackground());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -487,12 +505,22 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void dashboardTogglePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardTogglePanelMouseExited
         // TODO add your handling code here:
-        dashboardTogglePanel.setBackground(sideMenuPanel.getBackground());
+        if (!dashboardPanel.isVisible()) {
+            dashboardTogglePanel.setBackground(sideMenuPanel.getBackground());
+        }
     }//GEN-LAST:event_dashboardTogglePanelMouseExited
 
     private void dashboardTogglePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardTogglePanelMouseReleased
         // TODO add your handling code here:
-        
+        if (dashboardPanel.isVisible()) {
+            dashboardPanel.setVisible(false);
+        }
+        else {            
+            deixaTodosOsPanelsInvisiveis();
+            deixaTodosOsTogglesDoMenuNaCorPadrao();
+            dashboardPanel.setVisible(true);
+            dashboardTogglePanel.setBackground(new Color(25, 110, 247));            
+        }
     }//GEN-LAST:event_dashboardTogglePanelMouseReleased
 
     private void gerenciarDescartesTogglePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarDescartesTogglePanelMouseEntered
@@ -502,11 +530,22 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void gerenciarDescartesTogglePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarDescartesTogglePanelMouseExited
         // TODO add your handling code here:
-        gerenciarDescartesTogglePanel.setBackground(sideMenuPanel.getBackground());         
+        if (!gerenciarDescartesPanel.isVisible()) {
+            gerenciarDescartesTogglePanel.setBackground(sideMenuPanel.getBackground());
+        }                 
     }//GEN-LAST:event_gerenciarDescartesTogglePanelMouseExited
 
     private void gerenciarDescartesTogglePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarDescartesTogglePanelMouseReleased
         // TODO add your handling code here:
+        if (gerenciarDescartesPanel.isVisible()) {
+            gerenciarDescartesPanel.setVisible(false);
+        }
+        else {
+            deixaTodosOsPanelsInvisiveis();
+            deixaTodosOsTogglesDoMenuNaCorPadrao();           
+            gerenciarDescartesPanel.setVisible(true);
+            gerenciarDescartesTogglePanel.setBackground(new Color(25, 110, 247));
+        }
     }//GEN-LAST:event_gerenciarDescartesTogglePanelMouseReleased
 
     private void gerenciarUsuariosTogglePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarUsuariosTogglePanelMouseEntered
@@ -516,11 +555,22 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void gerenciarUsuariosTogglePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarUsuariosTogglePanelMouseExited
         // TODO add your handling code here:
-        gerenciarUsuariosTogglePanel.setBackground(sideMenuPanel.getBackground());
+        if (!gerenciarUsuariosPanel.isVisible()) {
+            gerenciarUsuariosTogglePanel.setBackground(sideMenuPanel.getBackground());
+        }       
     }//GEN-LAST:event_gerenciarUsuariosTogglePanelMouseExited
 
     private void gerenciarUsuariosTogglePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarUsuariosTogglePanelMouseReleased
         // TODO add your handling code here:
+        if (gerenciarUsuariosPanel.isVisible()) {
+            gerenciarUsuariosPanel.setVisible(false);
+        }
+        else {
+            deixaTodosOsPanelsInvisiveis();
+            deixaTodosOsTogglesDoMenuNaCorPadrao();           
+            gerenciarUsuariosPanel.setVisible(true);
+            gerenciarUsuariosTogglePanel.setBackground(new Color(25, 110, 247));
+        }        
     }//GEN-LAST:event_gerenciarUsuariosTogglePanelMouseReleased
 
     private void gerenciarMateriaisTogglePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarMateriaisTogglePanelMouseEntered
@@ -530,11 +580,22 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void gerenciarMateriaisTogglePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarMateriaisTogglePanelMouseExited
         // TODO add your handling code here:
-        gerenciarMateriaisTogglePanel.setBackground(sideMenuPanel.getBackground());
+        if (!gerenciarMateriaisPanel.isVisible()) {
+            gerenciarMateriaisTogglePanel.setBackground(sideMenuPanel.getBackground());
+        }       
     }//GEN-LAST:event_gerenciarMateriaisTogglePanelMouseExited
 
     private void gerenciarMateriaisTogglePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarMateriaisTogglePanelMouseReleased
         // TODO add your handling code here:
+        if (gerenciarMateriaisPanel.isVisible()) {
+            gerenciarMateriaisPanel.setVisible(false);
+        }
+        else {
+            deixaTodosOsPanelsInvisiveis();
+            deixaTodosOsTogglesDoMenuNaCorPadrao();           
+            gerenciarMateriaisPanel.setVisible(true);
+            gerenciarMateriaisTogglePanel.setBackground(new Color(25, 110, 247));
+        }         
     }//GEN-LAST:event_gerenciarMateriaisTogglePanelMouseReleased
 
     private void minhaContaTogglePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minhaContaTogglePanelMouseEntered
@@ -544,11 +605,22 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void minhaContaTogglePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minhaContaTogglePanelMouseExited
         // TODO add your handling code here:
-        minhaContaTogglePanel.setBackground(sideMenuPanel.getBackground());
+        if (!minhaContaPanel.isVisible()) {
+            minhaContaTogglePanel.setBackground(sideMenuPanel.getBackground());
+        }        
     }//GEN-LAST:event_minhaContaTogglePanelMouseExited
 
     private void minhaContaTogglePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minhaContaTogglePanelMouseReleased
         // TODO add your handling code here:
+        if (minhaContaPanel.isVisible()) {
+            minhaContaPanel.setVisible(false);
+        }
+        else {
+            deixaTodosOsPanelsInvisiveis();
+            deixaTodosOsTogglesDoMenuNaCorPadrao();           
+            minhaContaPanel.setVisible(true);
+            minhaContaTogglePanel.setBackground(new Color(25, 110, 247));
+        }         
     }//GEN-LAST:event_minhaContaTogglePanelMouseReleased
 
     /**
