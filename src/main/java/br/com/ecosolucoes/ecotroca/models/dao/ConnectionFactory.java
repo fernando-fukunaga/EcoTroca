@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class ConnectionFactory {
     private String user = "root";
-    private String senha = " ";
+    private String senha = "1234";
     private String host = "localhost";
     private String porta = "3306";
     private String banco = "ecotroca";

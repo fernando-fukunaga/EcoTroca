@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
-    ConnectionFactory factory = new ConnectionFactory();
+    static ConnectionFactory factory = new ConnectionFactory();
     
-    public void createUsuario(Usuario usuario) {
+    public static void createUsuario(Usuario usuario) {
         String sql = "insert into usuario (id,id_pessoa,login,senha,perfil_acesso) values (?,?,?,?,?)";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);

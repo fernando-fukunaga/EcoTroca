@@ -1,4 +1,5 @@
 package br.com.ecosolucoes.ecotroca.models;
+import java.sql.Date;
 import java.time.LocalDate;
 
 
@@ -57,6 +58,10 @@ public class Descarte {
 
     public void setTotalPontosGerados(double totalPontosGerados) {
         this.totalPontosGerados = totalPontosGerados;
+    }
+
+    public void setDataHoraDescarte(Date dataHoraDescarte) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     
