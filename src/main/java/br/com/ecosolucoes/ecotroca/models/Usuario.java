@@ -11,6 +11,15 @@ public class Usuario {
     private String login;
     private String senha;
     private Perfil perfilAcesso;
+    private boolean usuarioAtivo;
+
+    public Usuario(int idPessoa, String login, String senha, Perfil perfilAcesso, boolean usuarioAtivo) {
+        this.idPessoa = idPessoa;
+        this.login = login;
+        this.senha = senha;
+        this.perfilAcesso = perfilAcesso;
+        this.usuarioAtivo = usuarioAtivo;
+    }
 
     public int getId() {
         return id;
@@ -51,6 +60,16 @@ public class Usuario {
     public void setPerfilAcesso(Perfil perfilAcesso) {
         this.perfilAcesso = perfilAcesso;
     }
+
+    public boolean isUsuarioAtivo() {
+        return usuarioAtivo;
+    }
+
+    public void setUsuarioAtivo(boolean usuarioAtivo) {
+        this.usuarioAtivo = usuarioAtivo;
+    }
+    
+    
     
     
 }

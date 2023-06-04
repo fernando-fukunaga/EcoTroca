@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  * @author fanna
  */
 public class PessoaDAO {   
-    ConnectionFactory factory = new ConnectionFactory(); // criando uma factory de conexão com o banco
+    static ConnectionFactory factory = new ConnectionFactory(); // criando uma factory de conexão com o banco
     
     // Métodos de CRUD:
     
     // Método para inserir nova pessoa no banco
-    public void createPessoa(Pessoa pessoa) {
+    public static void createPessoa(Pessoa pessoa) {
         String sql = "insert into pessoa(nome,sobrenome,email,data_nascimento,endereco,telefone,cpf) values(?,?,?,?,?,?,?)"; //criando uma string de base com o comando sql e variáveis nos valores
         
         //Tentar a inserção, passando a conexão com o banco como parâmetro
@@ -47,7 +47,7 @@ public class PessoaDAO {
         }
     }
     
-    public Pessoa readPessoa(int id) {
+    public static Pessoa readPessoa(int id) {
         String sql = "select * from pessoa where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -61,11 +61,8 @@ public class PessoaDAO {
                 String endereco = rs.getString("endereco");
                 String telefone = rs.getString("telefone");
                 String cpf = rs.getString("cpf");
-                Pessoa pessoa = new Pessoa();
-                pessoa.setId(id); pessoa.setNome(nome); pessoa.setSobrenome(sobrenome); 
-                pessoa.setEmail(email); pessoa.setDataNascimento(dataNascimento); 
-                pessoa.setEndereco(endereco); pessoa.setTelefone(telefone); 
-                pessoa.setCpf(cpf);
+                Pessoa pessoa = new Pessoa(nome,sobrenome,email,dataNascimento,endereco,telefone,cpf);
+                pessoa.setId(id);
                 return pessoa;
             }
             else {
@@ -80,7 +77,7 @@ public class PessoaDAO {
         return null;
     }
     
-    public void updatePessoa(Pessoa pessoa) {
+    public static void updatePessoa(Pessoa pessoa) {
         String sql = "update pessoa set nome = ?, sobrenome = ?, email = ?, data_nascimento = ?, endereco = ?, telefone = ?, cpf = ? where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -100,7 +97,7 @@ public class PessoaDAO {
         }
     }
     
-    public void deletePessoa(int id) {
+    public static void deletePessoa(int id) {
         String sql = "delete from pessoa where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -112,5 +109,63 @@ public class PessoaDAO {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
             e.printStackTrace();
         }
+    }
+    
+    public static Pessoa procurarPessoaPeloEmail(String email) {
+        String sql = "select * from pessoa where email = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String sobrenome = rs.getString("sobrenome");
+                Date dataNascimento = rs.getDate("data_nascimento");
+                String endereco = rs.getString("endereco");
+                String telefone = rs.getString("telefone");
+                String cpf = rs.getString("cpf");
+                Pessoa pessoa = new Pessoa(nome,sobrenome,email,dataNascimento,endereco,telefone,cpf);
+                pessoa.setId(id);
+                return pessoa;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Pessoa não encontrada!");
+            }
+
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean checarDadosUnicosNaoRepetem(String email, String cpf) {
+        String sqlEmail = "select * from pessoa where email = ?";
+        String sqlCpf = "select * from pessoa where cpf = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement psEmail = conn.prepareStatement(sqlEmail);
+            psEmail.setString(1, email);
+            ResultSet rsEmail = psEmail.executeQuery();
+            if (rsEmail.next()) {
+                JOptionPane.showMessageDialog(null, "Esse e-mail já está cadastrado!");
+                return false;
+            }
+            PreparedStatement psCpf = conn.prepareStatement(sqlCpf);
+            psCpf.setString(1, cpf);
+            ResultSet rsCpf = psCpf.executeQuery();
+            if (rsCpf.next()) {
+                JOptionPane.showMessageDialog(null, "Esse CPF já está cadastrado!");
+                return false;
+            }
+            return true;
+
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return false;
     }    
 }

@@ -1,11 +1,6 @@
 package br.com.ecosolucoes.ecotroca.models;
 
-import br.com.ecosolucoes.ecotroca.models.dao.ConnectionFactory; //importando classe se conexão com o banco
 import java.sql.Date; // essa importação é para usarmos o tipo de variável DATA
-import java.sql.Connection; // modulo do sql para fazer uma conexão com o banco
-import java.sql.PreparedStatement; // módulo que prepara um comando SQL para ser executado quando você mandar
-import java.sql.ResultSet; // módulo que é usado para trabalhar com resultados de pesquisas no banco usando o SELECT
-import javax.swing.JOptionPane; // JOptionPane para imprimir o SELECT
 
 public class Pessoa {
     /* Definindo os atributos da classe, a classe não terá método construtor pois ele irá atrapalhar na hora de fazer as operações CRUD,
@@ -19,6 +14,16 @@ public class Pessoa {
     private String endereco;
     private String telefone;
     private String cpf;
+
+    public Pessoa(String nome, String sobrenome, String email, Date dataNascimento, String endereco, String telefone, String cpf) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.cpf = cpf;
+    }
     
     // Getters e Setters (o NetBeans os gera automaticamente!)
 

@@ -10,7 +10,7 @@ email varchar(50) not null unique,
 data_nascimento date not null,
 endereco varchar(110) not null,
 telefone varchar(18) not null,
-cpf varchar(14) not null unique
+cpf varchar(11) not null unique
 );
 
 insert into pessoa(nome,sobrenome,email,data_nascimento,endereco,telefone,cpf) values(
@@ -20,22 +20,24 @@ insert into pessoa(nome,sobrenome,email,data_nascimento,endereco,telefone,cpf) v
 '2002-04-25',
 'Rua Taquari, 546 - Mooca, São Paulo - SP, 03166-000',
 '(11) 91111-1111',
-'111.111.111-11');
+'11111111111');
 
 create table usuario(
 id int primary key auto_increment,
 id_pessoa int not null,
 login varchar(11) not null unique,
 senha varchar(100) not null,
-perfil_acesso enum('admin', 'funcionario') not null,
+perfil_acesso enum('admin', 'funcionario') not null default 'funcionario',
+usuario_ativo boolean not null default false,
 constraint fk_usuario_id_pessoa foreign key (id_pessoa) references pessoa(id)
 );
 
-insert into usuario(id_pessoa,login,senha,perfil_acesso) values(
+insert into usuario(id_pessoa,login,senha,perfil_acesso,usuario_ativo) values(
 1,
 'fukunaga123',
 'senhasecreta',
-'admin'
+'admin',
+true
 );
 
 create table cidadao(
