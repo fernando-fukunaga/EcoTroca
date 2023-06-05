@@ -4,8 +4,11 @@
  */
 package br.com.ecosolucoes.ecotroca.views;
 
+import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,7 +29,14 @@ public class TelaHome extends javax.swing.JFrame {
         gerenciarDescartesPanel.setVisible(false);
         gerenciarUsuariosPanel.setVisible(false);
         gerenciarMateriaisPanel.setVisible(false);
-        minhaContaPanel.setVisible(false);        
+        minhaContaPanel.setVisible(false); 
+        
+        DefaultTableModel model = (DefaultTableModel) usuariosTable.getModel();
+        ArrayList<Object[]> objetos;
+        objetos = UsuarioDAO.listarUsuariosParaTabela();
+        for (Object[] objeto : objetos) {
+            model.addRow(objeto);
+        }        
     }
 
     public void deixaTodosOsPanelsInvisiveis() {
@@ -539,6 +549,7 @@ public class TelaHome extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        usuariosTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(usuariosTable);
 
         jLabel7.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
@@ -561,6 +572,11 @@ public class TelaHome extends javax.swing.JFrame {
 
         pesquisarUsuarioButton1.setBackground(new java.awt.Color(25, 110, 247));
         pesquisarUsuarioButton1.setText("Pesquisar Usuario");
+        pesquisarUsuarioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisarUsuarioButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout gerenciarUsuariosPanelLayout = new javax.swing.GroupLayout(gerenciarUsuariosPanel);
         gerenciarUsuariosPanel.setLayout(gerenciarUsuariosPanelLayout);
@@ -952,6 +968,12 @@ public class TelaHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_excluirDescarteButton1ActionPerformed
 
+    private void pesquisarUsuarioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarUsuarioButton1ActionPerformed
+        // TODO add your handling code here:
+        TelaPesquisarUsuario tpu = new TelaPesquisarUsuario();
+        tpu.setVisible(true);
+    }//GEN-LAST:event_pesquisarUsuarioButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1016,7 +1038,6 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
