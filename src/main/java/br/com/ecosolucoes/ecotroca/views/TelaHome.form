@@ -1112,7 +1112,7 @@
                         <Column editable="false" title="ID Material" type="java.lang.Integer"/>
                         <Column editable="false" title="Nome Material" type="java.lang.String"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
-                        <Column editable="false" title="Potua&#xe7;&#xe3;o a cada 100g" type="java.lang.Double"/>
+                        <Column editable="false" title="Pontua&#xe7;&#xe3;o a cada 100g" type="java.lang.Double"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1162,6 +1162,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Novo Material"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novoMaterialButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="pesquisarMaterialButton">
               <Properties>
@@ -1170,6 +1173,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pesquisar Material"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesquisarMaterialButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="editarMaterialButton">
               <Properties>
@@ -1178,6 +1184,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Editar Material"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarMaterialButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="excluirMaterialButton">
               <Properties>
@@ -1186,6 +1195,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Excluir Material"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirMaterialButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="atualizarTabelaMateriaisButton">
               <Properties>

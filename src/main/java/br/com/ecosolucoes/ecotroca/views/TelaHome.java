@@ -5,12 +5,17 @@
 package br.com.ecosolucoes.ecotroca.views;
 
 import br.com.ecosolucoes.ecotroca.models.dao.DescarteDAO;
+import br.com.ecosolucoes.ecotroca.models.dao.MaterialDAO;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaAtivarDesativarUsuario;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaPesquisarUsuario;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 import static br.com.ecosolucoes.ecotroca.views.TelaLogin.usuarioLogado;
 import br.com.ecosolucoes.ecotroca.views.descarte.TelaNovoDescarte;
 import br.com.ecosolucoes.ecotroca.views.descarte.TelaPesquisarDescarte;
+import br.com.ecosolucoes.ecotroca.views.material.TelaEditarMaterial;
+import br.com.ecosolucoes.ecotroca.views.material.TelaExcluirMaterial;
+import br.com.ecosolucoes.ecotroca.views.material.TelaNovoMaterial;
+import br.com.ecosolucoes.ecotroca.views.material.TelaPesquisarMaterial;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaAlterarAcessoUsuario;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaExcluirUsuario;
 import java.awt.Color;
@@ -53,6 +58,13 @@ public class TelaHome extends javax.swing.JFrame {
         descartes = DescarteDAO.listarDescartesParaTabela();
         for (Object[] descarte : descartes) {
             modelDescartes.addRow(descarte);
+        }
+
+        DefaultTableModel modelMateriais = (DefaultTableModel) materiaisTable.getModel();
+        ArrayList<Object[]> materiais;
+        materiais = MaterialDAO.listarMateriaisParaTabela();
+        for (Object[] material : materiais) {
+            modelMateriais.addRow(material);
         }        
     }
 
@@ -87,6 +99,16 @@ public class TelaHome extends javax.swing.JFrame {
         descartes = DescarteDAO.listarDescartesParaTabela();
         for (Object[] descarte : descartes) {
             modelDescartes.addRow(descarte);
+        }    
+    }
+    
+    public void atualizarTabelaMateriais() {
+        DefaultTableModel modelMateriais = (DefaultTableModel) materiaisTable.getModel();
+        modelMateriais.setRowCount(0);
+        ArrayList<Object[]> materiais;
+        materiais = MaterialDAO.listarMateriaisParaTabela();
+        for (Object[] material : materiais) {
+            modelMateriais.addRow(material);
         }    
     }
 
@@ -743,7 +765,7 @@ public class TelaHome extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Material", "Nome Material", "Descrição", "Potuação a cada 100g"
+                "ID Material", "Nome Material", "Descrição", "Pontuação a cada 100g"
             }
         ) {
             Class[] types = new Class [] {
@@ -769,15 +791,35 @@ public class TelaHome extends javax.swing.JFrame {
 
         novoMaterialButton.setBackground(new java.awt.Color(50, 168, 82));
         novoMaterialButton.setText("Novo Material");
+        novoMaterialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novoMaterialButtonActionPerformed(evt);
+            }
+        });
 
         pesquisarMaterialButton.setBackground(new java.awt.Color(25, 110, 247));
         pesquisarMaterialButton.setText("Pesquisar Material");
+        pesquisarMaterialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisarMaterialButtonActionPerformed(evt);
+            }
+        });
 
         editarMaterialButton.setBackground(new java.awt.Color(194, 148, 23));
         editarMaterialButton.setText("Editar Material");
+        editarMaterialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarMaterialButtonActionPerformed(evt);
+            }
+        });
 
         excluirMaterialButton.setBackground(new java.awt.Color(194, 23, 23));
         excluirMaterialButton.setText("Excluir Material");
+        excluirMaterialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluirMaterialButtonActionPerformed(evt);
+            }
+        });
 
         atualizarTabelaMateriaisButton.setText("Atualizar tabela");
         atualizarTabelaMateriaisButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1243,7 +1285,52 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void atualizarTabelaMateriaisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaMateriaisButtonActionPerformed
         // TODO add your handling code here:
+        atualizarTabelaMateriais();
     }//GEN-LAST:event_atualizarTabelaMateriaisButtonActionPerformed
+
+    private void novoMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoMaterialButtonActionPerformed
+        // TODO add your handling code here:
+        if (usuarioLogado.getPerfilAcesso().name().equals("admin")) {
+            TelaNovoMaterial tnm = new TelaNovoMaterial();
+            tnm.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
+        }        
+    }//GEN-LAST:event_novoMaterialButtonActionPerformed
+
+    private void pesquisarMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarMaterialButtonActionPerformed
+        // TODO add your handling code here:
+        if (usuarioLogado.getPerfilAcesso().name().equals("admin")) {
+            TelaPesquisarMaterial tpm = new TelaPesquisarMaterial();
+            tpm.setVisible(true);
+        }  
+        else {
+            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
+        }        
+    }//GEN-LAST:event_pesquisarMaterialButtonActionPerformed
+
+    private void editarMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarMaterialButtonActionPerformed
+        // TODO add your handling code here:
+        if (usuarioLogado.getPerfilAcesso().name().equals("admin")) {
+            TelaEditarMaterial tem = new TelaEditarMaterial();
+            tem.setVisible(true);
+        } 
+        else {
+            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
+        }        
+    }//GEN-LAST:event_editarMaterialButtonActionPerformed
+
+    private void excluirMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirMaterialButtonActionPerformed
+        // TODO add your handling code here:
+        if (usuarioLogado.getPerfilAcesso().name().equals("admin")) {
+            TelaExcluirMaterial tem = new TelaExcluirMaterial();
+            tem.setVisible(true);
+        }  
+        else {
+            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
+        }        
+    }//GEN-LAST:event_excluirMaterialButtonActionPerformed
 
     /**
      * @param args the command line arguments
