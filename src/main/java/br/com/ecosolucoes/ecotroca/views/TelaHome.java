@@ -45,6 +45,7 @@ public class TelaHome extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         mainPanel.setVisible(true);
+        backgroundPanel.setVisible(true);
         dashboardPanel.setVisible(false);
         gerenciarDescartesPanel.setVisible(false);
         gerenciarUsuariosPanel.setVisible(false);
@@ -140,6 +141,7 @@ public class TelaHome extends javax.swing.JFrame {
     private void initComponents() {
 
         logoPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         sideMenuPanel = new javax.swing.JPanel();
         dashboardTogglePanel = new javax.swing.JPanel();
         dashboardToggleLabel = new javax.swing.JLabel();
@@ -192,6 +194,7 @@ public class TelaHome extends javax.swing.JFrame {
         atualizarTabelaMateriaisButton = new javax.swing.JButton();
         minhaContaPanel = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         editarMeusDadosPessoaisButton = new javax.swing.JButton();
         editarMeusDadosDeLoginButton = new javax.swing.JButton();
         sairButton = new javax.swing.JButton();
@@ -201,6 +204,8 @@ public class TelaHome extends javax.swing.JFrame {
         editarCidadaoButton = new javax.swing.JButton();
         excluirCidadãoButton = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        backgroundPanel = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1018, 593));
@@ -211,15 +216,17 @@ public class TelaHome extends javax.swing.JFrame {
         logoPanel.setMinimumSize(new java.awt.Dimension(162, 162));
         logoPanel.setPreferredSize(new java.awt.Dimension(162, 162));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logomenu.jpg"))); // NOI18N
+
         javax.swing.GroupLayout logoPanelLayout = new javax.swing.GroupLayout(logoPanel);
         logoPanel.setLayout(logoPanelLayout);
         logoPanelLayout.setHorizontalGroup(
             logoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         logoPanelLayout.setVerticalGroup(
             logoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         sideMenuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -952,15 +959,18 @@ public class TelaHome extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.setPreferredSize(new java.awt.Dimension(186, 186));
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userphoto.jpg"))); // NOI18N
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 184, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, Short.MAX_VALUE)
         );
 
         editarMeusDadosPessoaisButton.setText("Editar meus dados pessoais");
@@ -1086,6 +1096,23 @@ public class TelaHome extends javax.swing.JFrame {
                 .addGap(195, 195, 195))
         );
 
+        backgroundPanel.setMaximumSize(new java.awt.Dimension(850, 593));
+        backgroundPanel.setMinimumSize(new java.awt.Dimension(850, 593));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout backgroundPanelLayout = new javax.swing.GroupLayout(backgroundPanel);
+        backgroundPanel.setLayout(backgroundPanelLayout);
+        backgroundPanelLayout.setHorizontalGroup(
+            backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+        );
+        backgroundPanelLayout.setVerticalGroup(
+            backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -1121,6 +1148,11 @@ public class TelaHome extends javax.swing.JFrame {
                     .addContainerGap(16, Short.MAX_VALUE)
                     .addComponent(gerenciarCidadaosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1154,6 +1186,11 @@ public class TelaHome extends javax.swing.JFrame {
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                     .addContainerGap(16, Short.MAX_VALUE)
                     .addComponent(gerenciarCidadaosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
 
@@ -1531,6 +1568,7 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JButton atualizarTabelaDescartesButton;
     private javax.swing.JButton atualizarTabelaMateriaisButton;
     private javax.swing.JButton atualizarTabelaUsuariosButton;
+    private javax.swing.JPanel backgroundPanel;
     private javax.swing.JButton cadastrarCidadaoButton;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JLabel dashboardToggleLabel;
@@ -1556,6 +1594,9 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JLabel gerenciarUsuariosToggleLabel;
     private javax.swing.JPanel gerenciarUsuariosTogglePanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
