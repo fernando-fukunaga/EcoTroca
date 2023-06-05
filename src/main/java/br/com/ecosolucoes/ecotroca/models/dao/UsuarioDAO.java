@@ -14,11 +14,7 @@ public class UsuarioDAO {
     static ConnectionFactory factory = new ConnectionFactory();
     
     public static void createUsuario(Usuario usuario) {
-<<<<<<< HEAD
-        String sql = "insert into usuario (id,id_pessoa,login,senha,perfil_acesso) values (?,?,?,?,?)";
-=======
         String sql = "insert into usuario (id_pessoa,login,senha,perfil_acesso,usuario_ativo) values (?,?,?,?,?)";
->>>>>>> d594b2f69b1cf9c77dc546b81ed2e0200daff151
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,usuario.getIdPessoa());
@@ -172,4 +168,32 @@ public class UsuarioDAO {
         }
         return null;
     }
+    
+    public static Usuario buscarUsuarioPeloLogin(String login) {
+        String sql = "select * from usuario where login = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, login);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                int idPessoa = rs.getInt("id_pessoa");
+                String senha = rs.getString("senha");
+                String strPerfilAcesso = rs.getString("perfil_acesso");
+                Perfil perfilAcesso = Perfil.valueOf(strPerfilAcesso);
+                boolean usuarioAtivo = rs.getBoolean("usuario_ativo");
+                Usuario usuario = new Usuario(idPessoa,login,senha,perfilAcesso,usuarioAtivo);
+                usuario.setId(id);
+                return usuario;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return null;
+    }    
 }

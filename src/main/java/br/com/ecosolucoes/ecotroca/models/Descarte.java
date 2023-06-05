@@ -1,9 +1,7 @@
 package br.com.ecosolucoes.ecotroca.models;
-<<<<<<< HEAD
+
 import java.sql.Date;
-import java.time.LocalDate;
-=======
->>>>>>> d594b2f69b1cf9c77dc546b81ed2e0200daff151
+import java.time.LocalDateTime;
 
 import java.time.LocalDateTime;
 

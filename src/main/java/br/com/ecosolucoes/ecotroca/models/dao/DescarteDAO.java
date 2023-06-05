@@ -11,7 +11,7 @@ public class DescarteDAO {
     
     public static void createDescarte(Descarte descarte) {
         String sql = "insert into descarte (id_cidadao; id_usuario; peso_total_descarte; total_pontos_gerados)"
-                + "valeus (?,?,?,?,)";
+                + "values (?,?,?,?,)";
         try (Connection conn = factory.obterConexao()){
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,descarte.getIdCidadao());

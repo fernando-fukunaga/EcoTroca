@@ -5,11 +5,6 @@
 package br.com.ecosolucoes.ecotroca.views;
 
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
-import br.com.ecosolucoes.ecotroca.models.dao.ConnectionFactory;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 
 /**
  *
