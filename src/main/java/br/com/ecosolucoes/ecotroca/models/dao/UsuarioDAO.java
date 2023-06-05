@@ -223,5 +223,33 @@ public class UsuarioDAO {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
             e.printStackTrace();
         }
+    }
+
+    public static void transfUsuarioEmAdmin(int id) {
+        String sql = "update usuario set perfil_acesso = 'admin' where id = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            JOptionPane.showMessageDialog(null,"Usuário alterado para ADMIN com sucesso!");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void transfUsuarioEmFuncionario(int id) {
+        String sql = "update usuario set perfil_acesso = 'funcionario' where id = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            JOptionPane.showMessageDialog(null,"Usuário alterado para FUNCIONARIO com sucesso!");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
     }    
 }

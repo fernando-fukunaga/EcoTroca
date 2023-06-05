@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.ecosolucoes.ecotroca.views;
+package br.com.ecosolucoes.ecotroca.views.usuario;
 
 import br.com.ecosolucoes.ecotroca.models.Pessoa;
 import br.com.ecosolucoes.ecotroca.models.Usuario;
@@ -15,17 +15,17 @@ import javax.swing.JOptionPane;
  *
  * @author ferna
  */
-public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
+public class TelaAlterarAcessoUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaPesquisarUsuario
      */
-    public TelaAtivarDesativarUsuario() {
-        super("Ativar ou Desativar Usuários");
+    public TelaAlterarAcessoUsuario() {
+        super("Alterar Acesso de Usuários");
         initComponents();
         this.setLocationRelativeTo(null);
-        ativarButton.setVisible(false);
-        desativarButton.setVisible(false);
+        alterarParaFuncButton.setVisible(false);
+        alterarParaAdminButton.setVisible(false);
     }
 
     /**
@@ -47,8 +47,8 @@ public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
         perfilAcessoTextField = new javax.swing.JTextField();
         usuarioAtivoTextField = new javax.swing.JTextField();
         idTextField = new javax.swing.JTextField();
-        ativarButton = new javax.swing.JButton();
-        desativarButton = new javax.swing.JButton();
+        alterarParaFuncButton = new javax.swing.JButton();
+        alterarParaAdminButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(813, 484));
@@ -114,19 +114,19 @@ public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
             }
         });
 
-        ativarButton.setBackground(new java.awt.Color(50, 168, 82));
-        ativarButton.setText("Ativar");
-        ativarButton.addActionListener(new java.awt.event.ActionListener() {
+        alterarParaFuncButton.setBackground(new java.awt.Color(194, 148, 23));
+        alterarParaFuncButton.setText("Transformar usuário em FUNCIONARIO");
+        alterarParaFuncButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ativarButtonActionPerformed(evt);
+                alterarParaFuncButtonActionPerformed(evt);
             }
         });
 
-        desativarButton.setBackground(new java.awt.Color(194, 23, 23));
-        desativarButton.setText("Desativar");
-        desativarButton.addActionListener(new java.awt.event.ActionListener() {
+        alterarParaAdminButton.setBackground(new java.awt.Color(194, 148, 23));
+        alterarParaAdminButton.setText("Transformar usuário em ADMIN");
+        alterarParaAdminButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                desativarButtonActionPerformed(evt);
+                alterarParaAdminButtonActionPerformed(evt);
             }
         });
 
@@ -135,25 +135,23 @@ public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(alterarParaFuncButton)
+                    .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62)
-                .addComponent(usuarioAtivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(139, 139, 139))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(ativarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(163, 163, 163)
-                .addComponent(desativarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usuarioAtivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alterarParaAdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(138, 138, 138))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,8 +167,8 @@ public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
                     .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ativarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(desativarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                    .addComponent(alterarParaFuncButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alterarParaAdminButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
                 .addGap(41, 41, 41))
         );
 
@@ -240,8 +238,8 @@ public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
             String strUsuarioAtivo;
             if (usuario.isUsuarioAtivo()) {strUsuarioAtivo = "Sim";} else {strUsuarioAtivo = "Não";}
             usuarioAtivoTextField.setText(strUsuarioAtivo);
-            ativarButton.setVisible(true);
-            desativarButton.setVisible(true);
+            alterarParaFuncButton.setVisible(true);
+            alterarParaAdminButton.setVisible(true);
         }        
     }//GEN-LAST:event_buscarPeloIdButtonActionPerformed
 
@@ -259,8 +257,8 @@ public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
             String strUsuarioAtivo;
             if (usuario.isUsuarioAtivo()) {strUsuarioAtivo = "Sim";} else {strUsuarioAtivo = "Não";}
             usuarioAtivoTextField.setText(strUsuarioAtivo);
-            ativarButton.setVisible(true);
-            desativarButton.setVisible(true);
+            alterarParaFuncButton.setVisible(true);
+            alterarParaAdminButton.setVisible(true);
         }        
     }//GEN-LAST:event_buscarPeloLoginButtonActionPerformed
 
@@ -272,15 +270,15 @@ public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextFieldActionPerformed
 
-    private void ativarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ativarButtonActionPerformed
+    private void alterarParaFuncButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarParaFuncButtonActionPerformed
         // TODO add your handling code here:
-        UsuarioDAO.ativarUsuario(Integer.parseInt(idTextField.getText()));
-    }//GEN-LAST:event_ativarButtonActionPerformed
+        UsuarioDAO.transfUsuarioEmFuncionario(Integer.parseInt(idTextField.getText()));
+    }//GEN-LAST:event_alterarParaFuncButtonActionPerformed
 
-    private void desativarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desativarButtonActionPerformed
+    private void alterarParaAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarParaAdminButtonActionPerformed
         // TODO add your handling code here:
-        UsuarioDAO.desativarUsuario(Integer.parseInt(idTextField.getText()));
-    }//GEN-LAST:event_desativarButtonActionPerformed
+        UsuarioDAO.transfUsuarioEmAdmin(Integer.parseInt(idTextField.getText()));
+    }//GEN-LAST:event_alterarParaAdminButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,32 +297,34 @@ public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaAtivarDesativarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarAcessoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaAtivarDesativarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarAcessoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaAtivarDesativarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarAcessoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaAtivarDesativarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarAcessoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaAtivarDesativarUsuario().setVisible(true);
+                new TelaAlterarAcessoUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ativarButton;
+    private javax.swing.JButton alterarParaAdminButton;
+    private javax.swing.JButton alterarParaFuncButton;
     private javax.swing.JButton buscarPeloIdButton;
     private javax.swing.JTextField buscarPeloIdTextField;
     private javax.swing.JButton buscarPeloLoginButton;
     private javax.swing.JTextField buscarPeloLoginTextField;
-    private javax.swing.JButton desativarButton;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField idTextField;
     private javax.swing.JPanel jPanel1;

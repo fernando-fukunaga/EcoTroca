@@ -804,13 +804,13 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                              <Component id="pesquisarUsuarioButton1" min="-2" pref="147" max="-2" attributes="0"/>
+                              <Component id="pesquisarUsuarioButton" min="-2" pref="147" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="ativarOuDesativarUsuarioButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                              <Component id="editarDescarteButton1" min="-2" pref="147" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="excluirDescarteButton1" min="-2" pref="147" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="alterarAcessoUsuarioButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="excluirUsuarioButton" min="-2" pref="147" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -823,7 +823,7 @@
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="atualizarTabelaButton" min="-2" pref="163" max="-2" attributes="0"/>
+                              <Component id="atualizarTabelaUsuariosButton" min="-2" pref="163" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -838,14 +838,14 @@
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ativarOuDesativarUsuarioButton" alignment="3" pref="61" max="32767" attributes="0"/>
-                          <Component id="editarDescarteButton1" alignment="3" pref="61" max="32767" attributes="0"/>
-                          <Component id="excluirDescarteButton1" alignment="3" pref="61" max="32767" attributes="0"/>
-                          <Component id="pesquisarUsuarioButton1" alignment="3" pref="61" max="32767" attributes="0"/>
+                          <Component id="alterarAcessoUsuarioButton" alignment="3" pref="61" max="32767" attributes="0"/>
+                          <Component id="excluirUsuarioButton" alignment="3" pref="61" max="32767" attributes="0"/>
+                          <Component id="pesquisarUsuarioButton" alignment="3" pref="61" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="259" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="atualizarTabelaButton" min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="atualizarTabelaUsuariosButton" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace pref="52" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -932,15 +932,18 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ativarOuDesativarUsuarioButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="editarDescarteButton1">
+            <Component class="javax.swing.JButton" name="alterarAcessoUsuarioButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="17" green="94" red="c2" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Editar Usuario"/>
+                <Property name="text" type="java.lang.String" value="Alterar Acesso de Usuario"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="alterarAcessoUsuarioButtonActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="excluirDescarteButton1">
+            <Component class="javax.swing.JButton" name="excluirUsuarioButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="17" green="17" red="c2" type="rgb"/>
@@ -948,10 +951,10 @@
                 <Property name="text" type="java.lang.String" value="Excluir Usuario"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirDescarteButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirUsuarioButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="pesquisarUsuarioButton1">
+            <Component class="javax.swing.JButton" name="pesquisarUsuarioButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f7" green="6e" red="19" type="rgb"/>
@@ -959,15 +962,15 @@
                 <Property name="text" type="java.lang.String" value="Pesquisar Usuario"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesquisarUsuarioButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesquisarUsuarioButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="atualizarTabelaButton">
+            <Component class="javax.swing.JButton" name="atualizarTabelaUsuariosButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar tabela"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atualizarTabelaButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atualizarTabelaUsuariosButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

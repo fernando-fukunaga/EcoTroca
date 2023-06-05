@@ -4,7 +4,10 @@
  */
 package br.com.ecosolucoes.ecotroca.views;
 
+import br.com.ecosolucoes.ecotroca.views.usuario.TelaAtivarDesativarUsuario;
+import br.com.ecosolucoes.ecotroca.views.usuario.TelaPesquisarUsuario;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
+import br.com.ecosolucoes.ecotroca.views.usuario.TelaAlterarAcessoUsuario;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -104,10 +107,10 @@ public class TelaHome extends javax.swing.JFrame {
         usuariosTable = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         ativarOuDesativarUsuarioButton = new javax.swing.JButton();
-        editarDescarteButton1 = new javax.swing.JButton();
-        excluirDescarteButton1 = new javax.swing.JButton();
-        pesquisarUsuarioButton1 = new javax.swing.JButton();
-        atualizarTabelaButton = new javax.swing.JButton();
+        alterarAcessoUsuarioButton = new javax.swing.JButton();
+        excluirUsuarioButton = new javax.swing.JButton();
+        pesquisarUsuarioButton = new javax.swing.JButton();
+        atualizarTabelaUsuariosButton = new javax.swing.JButton();
         gerenciarMateriaisPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -575,29 +578,34 @@ public class TelaHome extends javax.swing.JFrame {
             }
         });
 
-        editarDescarteButton1.setBackground(new java.awt.Color(194, 148, 23));
-        editarDescarteButton1.setText("Editar Usuario");
-
-        excluirDescarteButton1.setBackground(new java.awt.Color(194, 23, 23));
-        excluirDescarteButton1.setText("Excluir Usuario");
-        excluirDescarteButton1.addActionListener(new java.awt.event.ActionListener() {
+        alterarAcessoUsuarioButton.setBackground(new java.awt.Color(194, 148, 23));
+        alterarAcessoUsuarioButton.setText("Alterar Acesso de Usuario");
+        alterarAcessoUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excluirDescarteButton1ActionPerformed(evt);
+                alterarAcessoUsuarioButtonActionPerformed(evt);
             }
         });
 
-        pesquisarUsuarioButton1.setBackground(new java.awt.Color(25, 110, 247));
-        pesquisarUsuarioButton1.setText("Pesquisar Usuario");
-        pesquisarUsuarioButton1.addActionListener(new java.awt.event.ActionListener() {
+        excluirUsuarioButton.setBackground(new java.awt.Color(194, 23, 23));
+        excluirUsuarioButton.setText("Excluir Usuario");
+        excluirUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pesquisarUsuarioButton1ActionPerformed(evt);
+                excluirUsuarioButtonActionPerformed(evt);
             }
         });
 
-        atualizarTabelaButton.setText("Atualizar tabela");
-        atualizarTabelaButton.addActionListener(new java.awt.event.ActionListener() {
+        pesquisarUsuarioButton.setBackground(new java.awt.Color(25, 110, 247));
+        pesquisarUsuarioButton.setText("Pesquisar Usuario");
+        pesquisarUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atualizarTabelaButtonActionPerformed(evt);
+                pesquisarUsuarioButtonActionPerformed(evt);
+            }
+        });
+
+        atualizarTabelaUsuariosButton.setText("Atualizar tabela");
+        atualizarTabelaUsuariosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarTabelaUsuariosButtonActionPerformed(evt);
             }
         });
 
@@ -612,13 +620,13 @@ public class TelaHome extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(gerenciarUsuariosPanelLayout.createSequentialGroup()
                         .addGap(71, 71, 71)
-                        .addComponent(pesquisarUsuarioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(ativarOuDesativarUsuarioButton)
-                        .addGap(42, 42, 42)
-                        .addComponent(editarDescarteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(excluirDescarteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30)
+                        .addComponent(alterarAcessoUsuarioButton)
+                        .addGap(26, 26, 26)
+                        .addComponent(excluirUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenciarUsuariosPanelLayout.createSequentialGroup()
                 .addGap(0, 46, Short.MAX_VALUE)
@@ -627,7 +635,7 @@ public class TelaHome extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenciarUsuariosPanelLayout.createSequentialGroup()
-                        .addComponent(atualizarTabelaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(atualizarTabelaUsuariosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(339, 339, 339))))
         );
         gerenciarUsuariosPanelLayout.setVerticalGroup(
@@ -638,13 +646,13 @@ public class TelaHome extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(gerenciarUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ativarOuDesativarUsuarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(editarDescarteButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(excluirDescarteButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(pesquisarUsuarioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                    .addComponent(alterarAcessoUsuarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(excluirUsuarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(pesquisarUsuarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(atualizarTabelaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(atualizarTabelaUsuariosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
@@ -994,15 +1002,15 @@ public class TelaHome extends javax.swing.JFrame {
         }         
     }//GEN-LAST:event_minhaContaTogglePanelMouseReleased
 
-    private void excluirDescarteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirDescarteButton1ActionPerformed
+    private void excluirUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirUsuarioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_excluirDescarteButton1ActionPerformed
+    }//GEN-LAST:event_excluirUsuarioButtonActionPerformed
 
-    private void pesquisarUsuarioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarUsuarioButton1ActionPerformed
+    private void pesquisarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarUsuarioButtonActionPerformed
         // TODO add your handling code here:
         TelaPesquisarUsuario tpu = new TelaPesquisarUsuario();
         tpu.setVisible(true);
-    }//GEN-LAST:event_pesquisarUsuarioButton1ActionPerformed
+    }//GEN-LAST:event_pesquisarUsuarioButtonActionPerformed
 
     private void ativarOuDesativarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ativarOuDesativarUsuarioButtonActionPerformed
         // TODO add your handling code here:
@@ -1010,10 +1018,16 @@ public class TelaHome extends javax.swing.JFrame {
         tadu.setVisible(true);
     }//GEN-LAST:event_ativarOuDesativarUsuarioButtonActionPerformed
 
-    private void atualizarTabelaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaButtonActionPerformed
+    private void atualizarTabelaUsuariosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaUsuariosButtonActionPerformed
         // TODO add your handling code here:
         atualizarTabela();
-    }//GEN-LAST:event_atualizarTabelaButtonActionPerformed
+    }//GEN-LAST:event_atualizarTabelaUsuariosButtonActionPerformed
+
+    private void alterarAcessoUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarAcessoUsuarioButtonActionPerformed
+        // TODO add your handling code here:
+        TelaAlterarAcessoUsuario taau = new TelaAlterarAcessoUsuario();
+        taau.setVisible(true);
+    }//GEN-LAST:event_alterarAcessoUsuarioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1052,20 +1066,20 @@ public class TelaHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton alterarAcessoUsuarioButton;
     private javax.swing.JButton ativarOuDesativarUsuarioButton;
-    private javax.swing.JButton atualizarTabelaButton;
+    private javax.swing.JButton atualizarTabelaUsuariosButton;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JLabel dashboardToggleLabel;
     private javax.swing.JPanel dashboardTogglePanel;
     private javax.swing.JTable descartesTable;
     private javax.swing.JButton editarDescarteButton;
-    private javax.swing.JButton editarDescarteButton1;
     private javax.swing.JButton editarMaterialButton;
     private javax.swing.JButton editarMeusDadosDeLoginButton;
     private javax.swing.JButton editarMeusDadosPessoaisButton;
     private javax.swing.JButton excluirDescarteButton;
-    private javax.swing.JButton excluirDescarteButton1;
     private javax.swing.JButton excluirMaterialButton;
+    private javax.swing.JButton excluirUsuarioButton;
     private javax.swing.JPanel gerenciarDescartesPanel;
     private javax.swing.JLabel gerenciarDescartesToggleLabel;
     private javax.swing.JPanel gerenciarDescartesTogglePanel;
@@ -1097,7 +1111,7 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JButton novoMaterialButton;
     private javax.swing.JButton pesquisarDescarteButton;
     private javax.swing.JButton pesquisarMaterialButton;
-    private javax.swing.JButton pesquisarUsuarioButton1;
+    private javax.swing.JButton pesquisarUsuarioButton;
     private javax.swing.JButton sairButton;
     private javax.swing.JPanel sideMenuPanel;
     private javax.swing.JTable usuariosTable;

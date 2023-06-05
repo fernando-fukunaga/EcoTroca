@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.ecosolucoes.ecotroca.views;
+package br.com.ecosolucoes.ecotroca.views.usuario;
 
 import br.com.ecosolucoes.ecotroca.models.Pessoa;
 import br.com.ecosolucoes.ecotroca.models.Usuario;
@@ -15,15 +15,17 @@ import javax.swing.JOptionPane;
  *
  * @author ferna
  */
-public class TelaPesquisarUsuario extends javax.swing.JFrame {
+public class TelaAtivarDesativarUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaPesquisarUsuario
      */
-    public TelaPesquisarUsuario() {
-        super("Pesquisar Usuários");
+    public TelaAtivarDesativarUsuario() {
+        super("Ativar ou Desativar Usuários");
         initComponents();
         this.setLocationRelativeTo(null);
+        ativarButton.setVisible(false);
+        desativarButton.setVisible(false);
     }
 
     /**
@@ -40,18 +42,15 @@ public class TelaPesquisarUsuario extends javax.swing.JFrame {
         buscarPeloIdButton = new javax.swing.JButton();
         buscarPeloLoginButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        nomeCompletoTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
-        dataNascimentoTextField = new javax.swing.JTextField();
-        enderecoTextField = new javax.swing.JTextField();
-        telefoneTextField = new javax.swing.JTextField();
-        cpfTextField = new javax.swing.JTextField();
         loginTextField = new javax.swing.JTextField();
         perfilAcessoTextField = new javax.swing.JTextField();
         usuarioAtivoTextField = new javax.swing.JTextField();
+        idTextField = new javax.swing.JTextField();
+        ativarButton = new javax.swing.JButton();
+        desativarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(813, 484));
         setMinimumSize(new java.awt.Dimension(813, 484));
         setResizable(false);
 
@@ -75,23 +74,13 @@ public class TelaPesquisarUsuario extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        nomeCompletoTextField.setEditable(false);
-        nomeCompletoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome Completo"));
-
         emailTextField.setEditable(false);
         emailTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("E-mail"));
-
-        dataNascimentoTextField.setEditable(false);
-        dataNascimentoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Nascimento"));
-
-        enderecoTextField.setEditable(false);
-        enderecoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
-
-        telefoneTextField.setEditable(false);
-        telefoneTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Telefone"));
-
-        cpfTextField.setEditable(false);
-        cpfTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("CPF"));
+        emailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailTextFieldActionPerformed(evt);
+            }
+        });
 
         loginTextField.setEditable(false);
         loginTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome de Login"));
@@ -117,51 +106,72 @@ public class TelaPesquisarUsuario extends javax.swing.JFrame {
             }
         });
 
+        idTextField.setEditable(false);
+        idTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("ID do Usuário"));
+        idTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idTextFieldActionPerformed(evt);
+            }
+        });
+
+        ativarButton.setBackground(new java.awt.Color(50, 168, 82));
+        ativarButton.setText("Ativar");
+        ativarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ativarButtonActionPerformed(evt);
+            }
+        });
+
+        desativarButton.setBackground(new java.awt.Color(194, 23, 23));
+        desativarButton.setText("Desativar");
+        desativarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desativarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(usuarioAtivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enderecoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomeCompletoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dataNascimentoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(telefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(usuarioAtivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(177, 177, 177)
+                .addComponent(ativarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163)
+                .addComponent(desativarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeCompletoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataNascimentoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enderecoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usuarioAtivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usuarioAtivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ativarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(desativarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -172,7 +182,7 @@ public class TelaPesquisarUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 208, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(buscarPeloLoginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buscarPeloIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -223,19 +233,15 @@ public class TelaPesquisarUsuario extends javax.swing.JFrame {
         if (usuario != null) {
             JOptionPane.showMessageDialog(null, "Busca realizada com sucesso.");
             Pessoa pessoa = PessoaDAO.readPessoa(usuario.getIdPessoa());
-            nomeCompletoTextField.setText(pessoa.getNome()+" "+pessoa.getSobrenome());
-            emailTextField.setText(pessoa.getEmail());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String strDataNascimento = dateFormat.format(pessoa.getDataNascimento());
-            dataNascimentoTextField.setText(strDataNascimento);
-            enderecoTextField.setText(pessoa.getEndereco());
-            telefoneTextField.setText(pessoa.getTelefone());
-            cpfTextField.setText(pessoa.getCpf());
             loginTextField.setText(usuario.getLogin());
+            emailTextField.setText(pessoa.getEmail());
+            idTextField.setText(String.valueOf(usuario.getId()));
             perfilAcessoTextField.setText(usuario.getPerfilAcesso().name());
             String strUsuarioAtivo;
             if (usuario.isUsuarioAtivo()) {strUsuarioAtivo = "Sim";} else {strUsuarioAtivo = "Não";}
             usuarioAtivoTextField.setText(strUsuarioAtivo);
+            ativarButton.setVisible(true);
+            desativarButton.setVisible(true);
         }        
     }//GEN-LAST:event_buscarPeloIdButtonActionPerformed
 
@@ -246,22 +252,35 @@ public class TelaPesquisarUsuario extends javax.swing.JFrame {
         if (usuario != null) {
             JOptionPane.showMessageDialog(null, "Busca realizada com sucesso.");
             Pessoa pessoa = PessoaDAO.readPessoa(usuario.getIdPessoa());
-            nomeCompletoTextField.setText(pessoa.getNome()+" "+pessoa.getSobrenome());
-            emailTextField.setText(pessoa.getEmail());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String strDataNascimento = dateFormat.format(pessoa.getDataNascimento());
-            dataNascimentoTextField.setText(strDataNascimento);
-            enderecoTextField.setText(pessoa.getEndereco());
-            telefoneTextField.setText(pessoa.getTelefone());
-            cpfTextField.setText(pessoa.getCpf());
             loginTextField.setText(usuario.getLogin());
+            emailTextField.setText(pessoa.getEmail());
+            idTextField.setText(String.valueOf(usuario.getId()));
             perfilAcessoTextField.setText(usuario.getPerfilAcesso().name());
             String strUsuarioAtivo;
             if (usuario.isUsuarioAtivo()) {strUsuarioAtivo = "Sim";} else {strUsuarioAtivo = "Não";}
             usuarioAtivoTextField.setText(strUsuarioAtivo);
-            buscarPeloIdTextField.setText(String.valueOf(usuario.getId()));
+            ativarButton.setVisible(true);
+            desativarButton.setVisible(true);
         }        
     }//GEN-LAST:event_buscarPeloLoginButtonActionPerformed
+
+    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextFieldActionPerformed
+
+    private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idTextFieldActionPerformed
+
+    private void ativarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ativarButtonActionPerformed
+        // TODO add your handling code here:
+        UsuarioDAO.ativarUsuario(Integer.parseInt(idTextField.getText()));
+    }//GEN-LAST:event_ativarButtonActionPerformed
+
+    private void desativarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desativarButtonActionPerformed
+        // TODO add your handling code here:
+        UsuarioDAO.desativarUsuario(Integer.parseInt(idTextField.getText()));
+    }//GEN-LAST:event_desativarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,38 +299,37 @@ public class TelaPesquisarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAtivarDesativarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAtivarDesativarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAtivarDesativarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPesquisarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAtivarDesativarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPesquisarUsuario().setVisible(true);
+                new TelaAtivarDesativarUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ativarButton;
     private javax.swing.JButton buscarPeloIdButton;
     private javax.swing.JTextField buscarPeloIdTextField;
     private javax.swing.JButton buscarPeloLoginButton;
     private javax.swing.JTextField buscarPeloLoginTextField;
-    private javax.swing.JTextField cpfTextField;
-    private javax.swing.JTextField dataNascimentoTextField;
+    private javax.swing.JButton desativarButton;
     private javax.swing.JTextField emailTextField;
-    private javax.swing.JTextField enderecoTextField;
+    private javax.swing.JTextField idTextField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField loginTextField;
-    private javax.swing.JTextField nomeCompletoTextField;
     private javax.swing.JTextField perfilAcessoTextField;
-    private javax.swing.JTextField telefoneTextField;
     private javax.swing.JTextField usuarioAtivoTextField;
     // End of variables declaration//GEN-END:variables
 }
