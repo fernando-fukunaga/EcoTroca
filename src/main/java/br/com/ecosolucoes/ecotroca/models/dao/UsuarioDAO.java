@@ -195,5 +195,33 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
         return null;
+    } 
+    
+    public static void ativarUsuario(int id) {
+        String sql = "update usuario set usuario_ativo = true where id = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            JOptionPane.showMessageDialog(null,"Usuário ativado com sucesso!");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+    }  
+    
+    public static void desativarUsuario(int id) {
+        String sql = "update usuario set usuario_ativo = false where id = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            JOptionPane.showMessageDialog(null,"Usuário desativado com sucesso!");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
     }    
 }

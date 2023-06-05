@@ -36,7 +36,7 @@ public class TelaHome extends javax.swing.JFrame {
         objetos = UsuarioDAO.listarUsuariosParaTabela();
         for (Object[] objeto : objetos) {
             model.addRow(objeto);
-        }        
+        }
     }
 
     public void deixaTodosOsPanelsInvisiveis() {
@@ -558,6 +558,11 @@ public class TelaHome extends javax.swing.JFrame {
 
         ativarOuDesativarUsuarioButton.setBackground(new java.awt.Color(25, 110, 247));
         ativarOuDesativarUsuarioButton.setText("Ativar/Desativar Usuario");
+        ativarOuDesativarUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ativarOuDesativarUsuarioButtonActionPerformed(evt);
+            }
+        });
 
         editarDescarteButton1.setBackground(new java.awt.Color(194, 148, 23));
         editarDescarteButton1.setText("Editar Usuario");
@@ -973,6 +978,12 @@ public class TelaHome extends javax.swing.JFrame {
         TelaPesquisarUsuario tpu = new TelaPesquisarUsuario();
         tpu.setVisible(true);
     }//GEN-LAST:event_pesquisarUsuarioButton1ActionPerformed
+
+    private void ativarOuDesativarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ativarOuDesativarUsuarioButtonActionPerformed
+        // TODO add your handling code here:
+        TelaAtivarDesativarUsuario tadu = new TelaAtivarDesativarUsuario();
+        tadu.setVisible(true);
+    }//GEN-LAST:event_ativarOuDesativarUsuarioButtonActionPerformed
 
     /**
      * @param args the command line arguments
