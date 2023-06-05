@@ -3,6 +3,7 @@ package br.com.ecosolucoes.ecotroca.models;
 public class Material {
     private int id;
     private String tipoMaterial;
+    private String descricaoMaterial;
     private double pontuacaoMaterial;
 
     public int getId() {
@@ -21,6 +22,14 @@ public class Material {
         this.tipoMaterial = tipoMaterial;
     }
 
+    public String getDescricaoMaterial() {
+        return descricaoMaterial;
+    }
+
+    public void setDescricaoMaterial(String descricaoMaterial) {
+        this.descricaoMaterial = descricaoMaterial;
+    }
+    
     public double getPontuacaoMaterial() {
         return pontuacaoMaterial;
     }
