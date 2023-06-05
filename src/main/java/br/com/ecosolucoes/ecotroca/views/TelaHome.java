@@ -8,6 +8,7 @@ import br.com.ecosolucoes.ecotroca.views.usuario.TelaAtivarDesativarUsuario;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaPesquisarUsuario;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 import static br.com.ecosolucoes.ecotroca.views.TelaLogin.usuarioLogado;
+import br.com.ecosolucoes.ecotroca.views.descarte.TelaNovoDescarte;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaAlterarAcessoUsuario;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaExcluirUsuario;
 import java.awt.Color;
@@ -137,7 +138,6 @@ public class TelaHome extends javax.swing.JFrame {
         excluirCidadãoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1018, 593));
         setMinimumSize(new java.awt.Dimension(1018, 593));
         setResizable(false);
 
@@ -536,6 +536,11 @@ public class TelaHome extends javax.swing.JFrame {
 
         novoDescarteButton.setBackground(new java.awt.Color(50, 168, 82));
         novoDescarteButton.setText("Novo Descarte");
+        novoDescarteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novoDescarteButtonActionPerformed(evt);
+            }
+        });
 
         pesquisarDescarteButton.setBackground(new java.awt.Color(25, 110, 247));
         pesquisarDescarteButton.setText("Pesquisar Descarte");
@@ -1184,6 +1189,12 @@ public class TelaHome extends javax.swing.JFrame {
         tl.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_sairButtonActionPerformed
+
+    private void novoDescarteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoDescarteButtonActionPerformed
+        // TODO add your handling code here:
+        TelaNovoDescarte tnd = new TelaNovoDescarte();
+        tnd.setVisible(true);
+    }//GEN-LAST:event_novoDescarteButtonActionPerformed
 
     /**
      * @param args the command line arguments

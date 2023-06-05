@@ -2,6 +2,7 @@ package br.com.ecosolucoes.ecotroca.models;
 
 public class MaterialDescarte {
    private int id;
+   private int idDescarte;
    private int idMaterial;
    private double pesoDescartado;
    private double pontosGerados;
@@ -12,6 +13,14 @@ public class MaterialDescarte {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdDescarte() {
+        return idDescarte;
+    }
+
+    public void setIdDescarte(int idDescarte) {
+        this.idDescarte = idDescarte;
     }
 
     public int getIdMaterial() {

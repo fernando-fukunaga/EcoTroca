@@ -4,11 +4,20 @@
  */
 package br.com.ecosolucoes.ecotroca.views.descarte;
 
+import br.com.ecosolucoes.ecotroca.models.Cidadao;
+import br.com.ecosolucoes.ecotroca.models.Descarte;
+import br.com.ecosolucoes.ecotroca.models.Material;
+import br.com.ecosolucoes.ecotroca.models.MaterialDescarte;
 import br.com.ecosolucoes.ecotroca.views.usuario.*;
 import br.com.ecosolucoes.ecotroca.models.Pessoa;
 import br.com.ecosolucoes.ecotroca.models.Usuario;
+import br.com.ecosolucoes.ecotroca.models.dao.CidadaoDAO;
+import br.com.ecosolucoes.ecotroca.models.dao.DescarteDAO;
+import br.com.ecosolucoes.ecotroca.models.dao.MaterialDAO;
+import br.com.ecosolucoes.ecotroca.models.dao.MaterialDescarteDAO;
 import br.com.ecosolucoes.ecotroca.models.dao.PessoaDAO;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
+import static br.com.ecosolucoes.ecotroca.views.TelaLogin.usuarioLogado;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
@@ -22,10 +31,12 @@ public class TelaNovoDescarte extends javax.swing.JFrame {
      * Creates new form TelaPesquisarUsuario
      */
     public TelaNovoDescarte() {
-        super("Pesquisar Usuários");
+        super("Novo Descarte");
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    public static int idDescarte;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,232 +47,183 @@ public class TelaNovoDescarte extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buscarPeloIdTextField = new javax.swing.JTextField();
-        buscarPeloLoginTextField = new javax.swing.JTextField();
-        buscarPeloIdButton = new javax.swing.JButton();
-        buscarPeloLoginButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        nomeCompletoTextField = new javax.swing.JTextField();
-        emailTextField = new javax.swing.JTextField();
-        dataNascimentoTextField = new javax.swing.JTextField();
-        enderecoTextField = new javax.swing.JTextField();
-        telefoneTextField = new javax.swing.JTextField();
-        cpfTextField = new javax.swing.JTextField();
-        loginTextField = new javax.swing.JTextField();
-        perfilAcessoTextField = new javax.swing.JTextField();
-        usuarioAtivoTextField = new javax.swing.JTextField();
+        buscarPeloCpfTextField = new javax.swing.JTextField();
+        nomeCidadaoTextField = new javax.swing.JTextField();
+        buscarPeloCpfButton = new javax.swing.JButton();
+        idCidadaoTextField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        materialDescarteTable = new javax.swing.JTable();
+        buscarMaterialPeloIdTextField = new javax.swing.JTextField();
+        nomeMaterialTextField = new javax.swing.JTextField();
+        pesoDescartadoTextField = new javax.swing.JTextField();
+        buscarMaterialPeloIdButton = new javax.swing.JButton();
+        adicionarMaterialDescarteButton = new javax.swing.JButton();
+        registrarDescarteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(813, 484));
+        setMaximumSize(new java.awt.Dimension(336, 484));
+        setMinimumSize(new java.awt.Dimension(336, 484));
         setResizable(false);
 
-        buscarPeloIdTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar usuário pelo ID"));
+        buscarPeloCpfTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Insira o CPF do cidadão"));
 
-        buscarPeloLoginTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar usuário pelo nome de login"));
+        nomeCidadaoTextField.setEditable(false);
+        nomeCidadaoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome cidadão"));
 
-        buscarPeloIdButton.setText("Buscar");
-        buscarPeloIdButton.addActionListener(new java.awt.event.ActionListener() {
+        buscarPeloCpfButton.setText("Buscar");
+        buscarPeloCpfButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarPeloIdButtonActionPerformed(evt);
+                buscarPeloCpfButtonActionPerformed(evt);
             }
         });
 
-        buscarPeloLoginButton.setText("Buscar");
-        buscarPeloLoginButton.addActionListener(new java.awt.event.ActionListener() {
+        idCidadaoTextField.setEditable(false);
+        idCidadaoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("ID cidadão"));
+
+        materialDescarteTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Material", "Peso (kg)", "Pontos"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(materialDescarteTable);
+
+        buscarMaterialPeloIdTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Insira o ID do material"));
+
+        nomeMaterialTextField.setEditable(false);
+        nomeMaterialTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome material"));
+
+        pesoDescartadoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Peso (kg) descartado"));
+
+        buscarMaterialPeloIdButton.setText("Buscar");
+        buscarMaterialPeloIdButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarPeloLoginButtonActionPerformed(evt);
+                buscarMaterialPeloIdButtonActionPerformed(evt);
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        nomeCompletoTextField.setEditable(false);
-        nomeCompletoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome Completo"));
-
-        emailTextField.setEditable(false);
-        emailTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("E-mail"));
-
-        dataNascimentoTextField.setEditable(false);
-        dataNascimentoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Nascimento"));
-
-        enderecoTextField.setEditable(false);
-        enderecoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
-
-        telefoneTextField.setEditable(false);
-        telefoneTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Telefone"));
-
-        cpfTextField.setEditable(false);
-        cpfTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("CPF"));
-
-        loginTextField.setEditable(false);
-        loginTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome de Login"));
-        loginTextField.addActionListener(new java.awt.event.ActionListener() {
+        adicionarMaterialDescarteButton.setText("Adicionar Material");
+        adicionarMaterialDescarteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginTextFieldActionPerformed(evt);
+                adicionarMaterialDescarteButtonActionPerformed(evt);
             }
         });
 
-        perfilAcessoTextField.setEditable(false);
-        perfilAcessoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Perfil de Acesso"));
-        perfilAcessoTextField.addActionListener(new java.awt.event.ActionListener() {
+        registrarDescarteButton.setText("Registrar Descarte");
+        registrarDescarteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                perfilAcessoTextFieldActionPerformed(evt);
+                registrarDescarteButtonActionPerformed(evt);
             }
         });
-
-        usuarioAtivoTextField.setEditable(false);
-        usuarioAtivoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário Ativo"));
-        usuarioAtivoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuarioAtivoTextFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enderecoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomeCompletoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dataNascimentoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(telefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(usuarioAtivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeCompletoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataNascimentoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enderecoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(perfilAcessoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usuarioAtivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(adicionarMaterialDescarteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(buscarPeloLoginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buscarPeloIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buscarMaterialPeloIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buscarMaterialPeloIdButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(nomeMaterialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscarPeloIdButton)
-                            .addComponent(buscarPeloLoginButton))
-                        .addGap(201, 201, 201))
+                        .addComponent(pesoDescartadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(buscarPeloCpfTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buscarPeloCpfButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nomeCidadaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(idCidadaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(registrarDescarteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buscarPeloIdTextField)
-                    .addComponent(buscarPeloIdButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buscarPeloLoginTextField)
-                    .addComponent(buscarPeloLoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buscarPeloCpfTextField)
+                    .addComponent(buscarPeloCpfButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomeCidadaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idCidadaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buscarMaterialPeloIdTextField)
+                    .addComponent(buscarMaterialPeloIdButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomeMaterialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesoDescartadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(adicionarMaterialDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(registrarDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginTextFieldActionPerformed
+    private void buscarPeloCpfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPeloCpfButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_loginTextFieldActionPerformed
+        Pessoa pessoa = PessoaDAO.procurarPessoaPeloCpf(buscarPeloCpfTextField.getText());
+        nomeCidadaoTextField.setText(pessoa.getNome()+" "+pessoa.getSobrenome());
+        Cidadao cidadao = CidadaoDAO.buscarCidadaoPeloIdPessoa(pessoa.getId());
+        idCidadaoTextField.setText(String.valueOf(cidadao.getId()));
+        Descarte descarte = new Descarte();
+        descarte.setIdCidadao(cidadao.getId());
+        descarte.setIdUsuario(usuarioLogado.getId());
+        int idDescarteGerado = DescarteDAO.createDescarte(descarte);
+        idDescarte = idDescarteGerado;
+    }//GEN-LAST:event_buscarPeloCpfButtonActionPerformed
 
-    private void perfilAcessoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilAcessoTextFieldActionPerformed
+    private void buscarMaterialPeloIdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMaterialPeloIdButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_perfilAcessoTextFieldActionPerformed
+        Material material = MaterialDAO.readMaterial(Integer.parseInt(buscarMaterialPeloIdTextField.getText()));
+        nomeMaterialTextField.setText(material.getTipoMaterial());
+    }//GEN-LAST:event_buscarMaterialPeloIdButtonActionPerformed
 
-    private void usuarioAtivoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioAtivoTextFieldActionPerformed
+    private void adicionarMaterialDescarteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarMaterialDescarteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuarioAtivoTextFieldActionPerformed
+        MaterialDescarte materialDescarte = new MaterialDescarte();
+        materialDescarte.setIdDescarte(idDescarte);
+        materialDescarte.setIdMaterial(Integer.parseInt(buscarMaterialPeloIdTextField.getText()));
+        materialDescarte.setPesoDescartado(Double.parseDouble(pesoDescartadoTextField.getText()));
+        MaterialDescarteDAO.createMaterialDescarte(materialDescarte);
+    }//GEN-LAST:event_adicionarMaterialDescarteButtonActionPerformed
 
-    private void buscarPeloIdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPeloIdButtonActionPerformed
+    private void registrarDescarteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarDescarteButtonActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(buscarPeloIdTextField.getText());
-        Usuario usuario = UsuarioDAO.readUsuario(id);
-        if (usuario != null) {
-            JOptionPane.showMessageDialog(null, "Busca realizada com sucesso.");
-            Pessoa pessoa = PessoaDAO.readPessoa(usuario.getIdPessoa());
-            nomeCompletoTextField.setText(pessoa.getNome()+" "+pessoa.getSobrenome());
-            emailTextField.setText(pessoa.getEmail());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String strDataNascimento = dateFormat.format(pessoa.getDataNascimento());
-            dataNascimentoTextField.setText(strDataNascimento);
-            enderecoTextField.setText(pessoa.getEndereco());
-            telefoneTextField.setText(pessoa.getTelefone());
-            cpfTextField.setText(pessoa.getCpf());
-            loginTextField.setText(usuario.getLogin());
-            perfilAcessoTextField.setText(usuario.getPerfilAcesso().name());
-            String strUsuarioAtivo;
-            if (usuario.isUsuarioAtivo()) {strUsuarioAtivo = "Sim";} else {strUsuarioAtivo = "Não";}
-            usuarioAtivoTextField.setText(strUsuarioAtivo);
-        }        
-    }//GEN-LAST:event_buscarPeloIdButtonActionPerformed
-
-    private void buscarPeloLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPeloLoginButtonActionPerformed
-        // TODO add your handling code here:
-        String login = buscarPeloLoginTextField.getText();
-        Usuario usuario = UsuarioDAO.buscarUsuarioPeloLogin(login);
-        if (usuario != null) {
-            JOptionPane.showMessageDialog(null, "Busca realizada com sucesso.");
-            Pessoa pessoa = PessoaDAO.readPessoa(usuario.getIdPessoa());
-            nomeCompletoTextField.setText(pessoa.getNome()+" "+pessoa.getSobrenome());
-            emailTextField.setText(pessoa.getEmail());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String strDataNascimento = dateFormat.format(pessoa.getDataNascimento());
-            dataNascimentoTextField.setText(strDataNascimento);
-            enderecoTextField.setText(pessoa.getEndereco());
-            telefoneTextField.setText(pessoa.getTelefone());
-            cpfTextField.setText(pessoa.getCpf());
-            loginTextField.setText(usuario.getLogin());
-            perfilAcessoTextField.setText(usuario.getPerfilAcesso().name());
-            String strUsuarioAtivo;
-            if (usuario.isUsuarioAtivo()) {strUsuarioAtivo = "Sim";} else {strUsuarioAtivo = "Não";}
-            usuarioAtivoTextField.setText(strUsuarioAtivo);
-            buscarPeloIdTextField.setText(String.valueOf(usuario.getId()));
-        }        
-    }//GEN-LAST:event_buscarPeloLoginButtonActionPerformed
+        DescarteDAO.atualizarPesoEPontosDescarte(idDescarte);
+    }//GEN-LAST:event_registrarDescarteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,19 +262,17 @@ public class TelaNovoDescarte extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarPeloIdButton;
-    private javax.swing.JTextField buscarPeloIdTextField;
-    private javax.swing.JButton buscarPeloLoginButton;
-    private javax.swing.JTextField buscarPeloLoginTextField;
-    private javax.swing.JTextField cpfTextField;
-    private javax.swing.JTextField dataNascimentoTextField;
-    private javax.swing.JTextField emailTextField;
-    private javax.swing.JTextField enderecoTextField;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField loginTextField;
-    private javax.swing.JTextField nomeCompletoTextField;
-    private javax.swing.JTextField perfilAcessoTextField;
-    private javax.swing.JTextField telefoneTextField;
-    private javax.swing.JTextField usuarioAtivoTextField;
+    private javax.swing.JButton adicionarMaterialDescarteButton;
+    private javax.swing.JButton buscarMaterialPeloIdButton;
+    private javax.swing.JTextField buscarMaterialPeloIdTextField;
+    private javax.swing.JButton buscarPeloCpfButton;
+    private javax.swing.JTextField buscarPeloCpfTextField;
+    private javax.swing.JTextField idCidadaoTextField;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable materialDescarteTable;
+    private javax.swing.JTextField nomeCidadaoTextField;
+    private javax.swing.JTextField nomeMaterialTextField;
+    private javax.swing.JTextField pesoDescartadoTextField;
+    private javax.swing.JButton registrarDescarteButton;
     // End of variables declaration//GEN-END:variables
 }

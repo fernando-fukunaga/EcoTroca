@@ -29,7 +29,7 @@ public class CidadaoDAO {
    }   
                
     
-   public Cidadao readCidadao(int id){
+   public static Cidadao readCidadao(int id){
        String sql = "select * from cidadao where id = ?";
         try(Connection conn = factory.obterConexao()){
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -95,7 +95,36 @@ public class CidadaoDAO {
     }
     }     
         
+   public static Cidadao buscarCidadaoPeloIdPessoa(int idPessoa){
+       String sql = "select * from cidadao where id_pessoa = ?";
+        try(Connection conn = factory.obterConexao()){
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, idPessoa);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            int id = rs.getInt("id");
+            double saldoPontuacao = rs.getDouble("saldo_pontuacao");
+            Cidadao cidadao = new Cidadao();
+            cidadao.setId(id);cidadao.setIdPessoa(idPessoa);cidadao.setSaldoPontuacao(saldoPontuacao);
+            return cidadao;
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Dados não encontrados");
+            
+        }
+        }
         
+        
+
+        catch (Exception e){
+           JOptionPane.showMessageDialog(null, "Ocorreu um erro de conexão"); 
+           e.printStackTrace();
+        }
+        return null;
+        
+        
+        }        
 }
 
 

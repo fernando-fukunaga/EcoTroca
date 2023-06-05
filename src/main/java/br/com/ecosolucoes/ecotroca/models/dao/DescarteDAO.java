@@ -4,22 +4,28 @@ import br.com.ecosolucoes.ecotroca.models.Descarte;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class DescarteDAO {
     static ConnectionFactory factory = new ConnectionFactory();    
     
-    public static void createDescarte(Descarte descarte) {
-        String sql = "insert into descarte (id_cidadao; id_usuario; peso_total_descarte; total_pontos_gerados)"
-                + "values (?,?,?,?,)";
+    public static int createDescarte(Descarte descarte) {
+        String sql = "insert into descarte (id_cidadao, id_usuario)"
+                + "values (?,?)";
         try (Connection conn = factory.obterConexao()){
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,descarte.getIdCidadao());
             ps.setInt(2,descarte.getIdUsuario());
-            ps.setDouble(3,descarte.getPesoTotalDescarte());
-            ps.setDouble(4,descarte.getTotalPontosGerados());
-            ps.execute();
-            JOptionPane.showMessageDialog(null,"Dados inserido com sucesso");
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows > 0) {
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int primaryKey = generatedKeys.getInt(1);
+                    return primaryKey;
+                }
+                generatedKeys.close();
+            }            
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, "Ocorreu um erro de conexão"); 
@@ -27,7 +33,7 @@ public class DescarteDAO {
             
                    
                     }
-            
+            return 0;
                       
         }
 
@@ -103,6 +109,26 @@ public class DescarteDAO {
         
         
 }
+       
+           public static void atualizarPesoEPontosDescarte(int id) {
+        String sql = "update descarte set peso_total_descarte = ?, total_pontos_gerados = ?"
++ "where id = ?";
+        try(Connection conn = factory.obterConexao()){
+            PreparedStatement ps = conn.prepareStatement(sql);
+            double pontos = MaterialDescarteDAO.calculaTotalPontosDescarte(id);
+            double peso = MaterialDescarteDAO.calculaPesoTotalDescarte(id);
+            ps.setDouble(1,peso);
+            ps.setDouble(2,pontos);
+            ps.setInt(3,id);
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Descarte registrado com sucesso!");
+            
+        }     
+        catch (Exception e){
+             JOptionPane.showMessageDialog(null, "Ocorreu um erro de conexão"); 
+             e.printStackTrace();
+}
+    }
     
 }
 

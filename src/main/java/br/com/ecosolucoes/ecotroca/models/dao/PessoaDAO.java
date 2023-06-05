@@ -140,6 +140,36 @@ public class PessoaDAO {
         }
         return null;
     }
+    
+    public static Pessoa procurarPessoaPeloCpf(String cpf) {
+        String sql = "select * from pessoa where cpf = ?";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cpf);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String sobrenome = rs.getString("sobrenome");
+                Date dataNascimento = rs.getDate("data_nascimento");
+                String endereco = rs.getString("endereco");
+                String telefone = rs.getString("telefone");
+                String email = rs.getString("email");
+                Pessoa pessoa = new Pessoa(nome,sobrenome,email,dataNascimento,endereco,telefone,cpf);
+                pessoa.setId(id);
+                return pessoa;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Pessoa não encontrada!");
+            }
+
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return null;
+    }    
 
     public static boolean checarDadosUnicosNaoRepetem(String email, String cpf) {
         String sqlEmail = "select * from pessoa where email = ?";
