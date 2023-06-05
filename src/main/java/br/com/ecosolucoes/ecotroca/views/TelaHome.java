@@ -52,6 +52,16 @@ public class TelaHome extends javax.swing.JFrame {
             component.setBackground(sideMenuPanel.getBackground());
         }
     }
+    
+    public void atualizarTabela() {
+        DefaultTableModel model = (DefaultTableModel) usuariosTable.getModel();
+        model.setRowCount(0);
+        ArrayList<Object[]> objetos;
+        objetos = UsuarioDAO.listarUsuariosParaTabela();
+        for (Object[] objeto : objetos) {
+            model.addRow(objeto);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,6 +107,7 @@ public class TelaHome extends javax.swing.JFrame {
         editarDescarteButton1 = new javax.swing.JButton();
         excluirDescarteButton1 = new javax.swing.JButton();
         pesquisarUsuarioButton1 = new javax.swing.JButton();
+        atualizarTabelaButton = new javax.swing.JButton();
         gerenciarMateriaisPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -583,6 +594,13 @@ public class TelaHome extends javax.swing.JFrame {
             }
         });
 
+        atualizarTabelaButton.setText("Atualizar tabela");
+        atualizarTabelaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarTabelaButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout gerenciarUsuariosPanelLayout = new javax.swing.GroupLayout(gerenciarUsuariosPanel);
         gerenciarUsuariosPanel.setLayout(gerenciarUsuariosPanelLayout);
         gerenciarUsuariosPanelLayout.setHorizontalGroup(
@@ -604,8 +622,13 @@ public class TelaHome extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenciarUsuariosPanelLayout.createSequentialGroup()
                 .addGap(0, 46, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addGroup(gerenciarUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenciarUsuariosPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenciarUsuariosPanelLayout.createSequentialGroup()
+                        .addComponent(atualizarTabelaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(339, 339, 339))))
         );
         gerenciarUsuariosPanelLayout.setVerticalGroup(
             gerenciarUsuariosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -619,8 +642,10 @@ public class TelaHome extends javax.swing.JFrame {
                     .addComponent(excluirDescarteButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                     .addComponent(pesquisarUsuarioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(atualizarTabelaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         gerenciarMateriaisPanel.setMaximumSize(new java.awt.Dimension(850, 593));
@@ -985,6 +1010,11 @@ public class TelaHome extends javax.swing.JFrame {
         tadu.setVisible(true);
     }//GEN-LAST:event_ativarOuDesativarUsuarioButtonActionPerformed
 
+    private void atualizarTabelaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaButtonActionPerformed
+        // TODO add your handling code here:
+        atualizarTabela();
+    }//GEN-LAST:event_atualizarTabelaButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1023,6 +1053,7 @@ public class TelaHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ativarOuDesativarUsuarioButton;
+    private javax.swing.JButton atualizarTabelaButton;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JLabel dashboardToggleLabel;
     private javax.swing.JPanel dashboardTogglePanel;
