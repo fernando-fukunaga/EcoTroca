@@ -100,7 +100,7 @@ public class UsuarioDAO {
             ps.setString(2, senha);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Bem vindo!");
+                JOptionPane.showMessageDialog(null, "Autenticado com sucesso!");
                 return true;
             }
             else {
@@ -251,5 +251,23 @@ public class UsuarioDAO {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
             e.printStackTrace();
         }
-    }    
+    }
+
+    public static int extrairNumeroUsuariosAtivos() {
+        String sql = "select * from usuario where usuario_ativo = true;";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int tamanho = 0;
+            while (rs.next()){
+                tamanho++;
+            }
+            return tamanho;
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

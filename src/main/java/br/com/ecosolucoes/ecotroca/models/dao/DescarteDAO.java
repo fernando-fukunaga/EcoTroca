@@ -4,6 +4,7 @@ import br.com.ecosolucoes.ecotroca.models.Cidadao;
 import br.com.ecosolucoes.ecotroca.models.Descarte;
 import br.com.ecosolucoes.ecotroca.models.Pessoa;
 import br.com.ecosolucoes.ecotroca.models.Usuario;
+import static br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO.factory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -172,7 +173,63 @@ public class DescarteDAO {
         }
         return null;
         
-        }           
+        }
+    
+    public static int extrairNumeroDescartes() {
+        String sql = "select * from descarte;";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int tamanho = 0;
+            while (rs.next()){
+                tamanho++;
+            }
+            return tamanho;
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static double extrairPesoTotalRecebido() {
+        String sql = "select * from descarte;";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            double peso = 0;
+            while (rs.next()){
+                double p = rs.getDouble("peso_total_descarte");
+                peso += p;
+            }
+            return peso;
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return 0;
+    }    
+    
+    public static double extrairTotalPontosGerados() {
+        String sql = "select * from descarte;";
+        try (Connection conn = factory.obterConexao()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            double pontos = 0;
+            while (rs.next()){
+                double p = rs.getDouble("total_pontos_gerados");
+                pontos += p;
+            }
+            return pontos;
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
+            e.printStackTrace();
+        }
+        return 0;
+    }    
     
 }
 
