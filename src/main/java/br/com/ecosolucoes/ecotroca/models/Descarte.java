@@ -1,6 +1,7 @@
 package br.com.ecosolucoes.ecotroca.models;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ public class Descarte {
     private int id;
     private int idCidadao;
     private int idUsuario;
-    private LocalDateTime dataHoraDescarte;
+    private Timestamp dataHoraDescarte;
     private double pesoTotalDescarte;
     private double totalPontosGerados;
 
@@ -38,11 +39,11 @@ public class Descarte {
         this.idUsuario = idUsuario;
     }
 
-    public LocalDateTime getDataHoraDescarte() {
+    public Timestamp getDataHoraDescarte() {
         return dataHoraDescarte;
     }
 
-    public void setDataHoraDescarte(LocalDateTime dataHoraDescarte) {
+    public void setDataHoraDescarte(Timestamp dataHoraDescarte) {
         this.dataHoraDescarte = dataHoraDescarte;
     }
 

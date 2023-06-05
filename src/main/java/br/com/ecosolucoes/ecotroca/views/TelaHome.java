@@ -4,11 +4,13 @@
  */
 package br.com.ecosolucoes.ecotroca.views;
 
+import br.com.ecosolucoes.ecotroca.models.dao.DescarteDAO;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaAtivarDesativarUsuario;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaPesquisarUsuario;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 import static br.com.ecosolucoes.ecotroca.views.TelaLogin.usuarioLogado;
 import br.com.ecosolucoes.ecotroca.views.descarte.TelaNovoDescarte;
+import br.com.ecosolucoes.ecotroca.views.descarte.TelaPesquisarDescarte;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaAlterarAcessoUsuario;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaExcluirUsuario;
 import java.awt.Color;
@@ -39,12 +41,19 @@ public class TelaHome extends javax.swing.JFrame {
         gerenciarCidadaosPanel.setVisible(false);
         minhaContaPanel.setVisible(false); 
         
-        DefaultTableModel model = (DefaultTableModel) usuariosTable.getModel();
+        DefaultTableModel modelUsuarios = (DefaultTableModel) usuariosTable.getModel();
         ArrayList<Object[]> objetos;
         objetos = UsuarioDAO.listarUsuariosParaTabela();
         for (Object[] objeto : objetos) {
-            model.addRow(objeto);
+            modelUsuarios.addRow(objeto);
         }
+        
+        DefaultTableModel modelDescartes = (DefaultTableModel) descartesTable.getModel();
+        ArrayList<Object[]> descartes;
+        descartes = DescarteDAO.listarDescartesParaTabela();
+        for (Object[] descarte : descartes) {
+            modelDescartes.addRow(descarte);
+        }        
     }
 
     public void deixaTodosOsPanelsInvisiveis() {
@@ -61,14 +70,24 @@ public class TelaHome extends javax.swing.JFrame {
         }
     }
     
-    public void atualizarTabela() {
-        DefaultTableModel model = (DefaultTableModel) usuariosTable.getModel();
-        model.setRowCount(0);
+    public void atualizarTabelaUsuarios() {     
+        DefaultTableModel modelUsuarios = (DefaultTableModel) usuariosTable.getModel();
+        modelUsuarios.setRowCount(0);
         ArrayList<Object[]> objetos;
         objetos = UsuarioDAO.listarUsuariosParaTabela();
         for (Object[] objeto : objetos) {
-            model.addRow(objeto);
+            modelUsuarios.addRow(objeto);
         }
+    }
+    
+    public void atualizarTabelaDescartes() {
+        DefaultTableModel modelDescartes = (DefaultTableModel) descartesTable.getModel();
+        modelDescartes.setRowCount(0);
+        ArrayList<Object[]> descartes;
+        descartes = DescarteDAO.listarDescartesParaTabela();
+        for (Object[] descarte : descartes) {
+            modelDescartes.addRow(descarte);
+        }    
     }
 
     /**
@@ -107,8 +126,7 @@ public class TelaHome extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         novoDescarteButton = new javax.swing.JButton();
         pesquisarDescarteButton = new javax.swing.JButton();
-        editarDescarteButton = new javax.swing.JButton();
-        excluirDescarteButton = new javax.swing.JButton();
+        atualizarTabelaDescartesButton = new javax.swing.JButton();
         gerenciarUsuariosPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         usuariosTable = new javax.swing.JTable();
@@ -120,12 +138,13 @@ public class TelaHome extends javax.swing.JFrame {
         atualizarTabelaUsuariosButton = new javax.swing.JButton();
         gerenciarMateriaisPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        materiaisTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         novoMaterialButton = new javax.swing.JButton();
         pesquisarMaterialButton = new javax.swing.JButton();
         editarMaterialButton = new javax.swing.JButton();
         excluirMaterialButton = new javax.swing.JButton();
+        atualizarTabelaMateriaisButton = new javax.swing.JButton();
         minhaContaPanel = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         editarMeusDadosPessoaisButton = new javax.swing.JButton();
@@ -517,7 +536,7 @@ public class TelaHome extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -544,35 +563,42 @@ public class TelaHome extends javax.swing.JFrame {
 
         pesquisarDescarteButton.setBackground(new java.awt.Color(25, 110, 247));
         pesquisarDescarteButton.setText("Pesquisar Descarte");
+        pesquisarDescarteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisarDescarteButtonActionPerformed(evt);
+            }
+        });
 
-        editarDescarteButton.setBackground(new java.awt.Color(194, 148, 23));
-        editarDescarteButton.setText("Editar Descarte");
-
-        excluirDescarteButton.setBackground(new java.awt.Color(194, 23, 23));
-        excluirDescarteButton.setText("Excluir Descarte");
+        atualizarTabelaDescartesButton.setText("Atualizar tabela");
+        atualizarTabelaDescartesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarTabelaDescartesButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout gerenciarDescartesPanelLayout = new javax.swing.GroupLayout(gerenciarDescartesPanel);
         gerenciarDescartesPanel.setLayout(gerenciarDescartesPanelLayout);
         gerenciarDescartesPanelLayout.setHorizontalGroup(
             gerenciarDescartesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenciarDescartesPanelLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
             .addGroup(gerenciarDescartesPanelLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(novoDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
                 .addGroup(gerenciarDescartesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(gerenciarDescartesPanelLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(pesquisarDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
-                        .addComponent(editarDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(excluirDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(gerenciarDescartesPanelLayout.createSequentialGroup()
+                        .addGap(339, 339, 339)
+                        .addComponent(atualizarTabelaDescartesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(gerenciarDescartesPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(gerenciarDescartesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(gerenciarDescartesPanelLayout.createSequentialGroup()
+                        .addComponent(novoDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(pesquisarDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         gerenciarDescartesPanelLayout.setVerticalGroup(
             gerenciarDescartesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,12 +608,12 @@ public class TelaHome extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(gerenciarDescartesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pesquisarDescarteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(editarDescarteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(excluirDescarteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                     .addComponent(novoDescarteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(atualizarTabelaDescartesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         gerenciarUsuariosPanel.setMaximumSize(new java.awt.Dimension(850, 593));
@@ -712,7 +738,7 @@ public class TelaHome extends javax.swing.JFrame {
         gerenciarMateriaisPanel.setMaximumSize(new java.awt.Dimension(850, 593));
         gerenciarMateriaisPanel.setMinimumSize(new java.awt.Dimension(850, 593));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        materiaisTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -735,7 +761,7 @@ public class TelaHome extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(materiaisTable);
 
         jLabel8.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -753,6 +779,13 @@ public class TelaHome extends javax.swing.JFrame {
         excluirMaterialButton.setBackground(new java.awt.Color(194, 23, 23));
         excluirMaterialButton.setText("Excluir Material");
 
+        atualizarTabelaMateriaisButton.setText("Atualizar tabela");
+        atualizarTabelaMateriaisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarTabelaMateriaisButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout gerenciarMateriaisPanelLayout = new javax.swing.GroupLayout(gerenciarMateriaisPanel);
         gerenciarMateriaisPanel.setLayout(gerenciarMateriaisPanelLayout);
         gerenciarMateriaisPanelLayout.setHorizontalGroup(
@@ -766,14 +799,17 @@ public class TelaHome extends javax.swing.JFrame {
                         .addGap(213, 213, 213)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(gerenciarMateriaisPanelLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
+                        .addGap(72, 72, 72)
                         .addComponent(novoMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
                         .addComponent(pesquisarMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addComponent(editarMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(excluirMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(excluirMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(gerenciarMateriaisPanelLayout.createSequentialGroup()
+                        .addGap(334, 334, 334)
+                        .addComponent(atualizarTabelaMateriaisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         gerenciarMateriaisPanelLayout.setVerticalGroup(
@@ -781,19 +817,17 @@ public class TelaHome extends javax.swing.JFrame {
             .addGroup(gerenciarMateriaisPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(gerenciarMateriaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(gerenciarMateriaisPanelLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
-                    .addGroup(gerenciarMateriaisPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(gerenciarMateriaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(novoMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pesquisarMaterialButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                            .addComponent(editarMaterialButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                            .addComponent(excluirMaterialButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(16, 16, 16)
+                .addGroup(gerenciarMateriaisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(novoMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesquisarMaterialButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(editarMaterialButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(excluirMaterialButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(atualizarTabelaMateriaisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         minhaContaPanel.setMaximumSize(new java.awt.Dimension(850, 593));
@@ -1144,7 +1178,7 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void atualizarTabelaUsuariosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaUsuariosButtonActionPerformed
         // TODO add your handling code here:
-        atualizarTabela();
+        atualizarTabelaUsuarios();
     }//GEN-LAST:event_atualizarTabelaUsuariosButtonActionPerformed
 
     private void alterarAcessoUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarAcessoUsuarioButtonActionPerformed
@@ -1196,6 +1230,21 @@ public class TelaHome extends javax.swing.JFrame {
         tnd.setVisible(true);
     }//GEN-LAST:event_novoDescarteButtonActionPerformed
 
+    private void atualizarTabelaDescartesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaDescartesButtonActionPerformed
+        // TODO add your handling code here:
+        atualizarTabelaDescartes();
+    }//GEN-LAST:event_atualizarTabelaDescartesButtonActionPerformed
+
+    private void pesquisarDescarteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarDescarteButtonActionPerformed
+        // TODO add your handling code here:
+        TelaPesquisarDescarte tpd = new TelaPesquisarDescarte();
+        tpd.setVisible(true);
+    }//GEN-LAST:event_pesquisarDescarteButtonActionPerformed
+
+    private void atualizarTabelaMateriaisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaMateriaisButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_atualizarTabelaMateriaisButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1235,6 +1284,8 @@ public class TelaHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alterarAcessoUsuarioButton;
     private javax.swing.JButton ativarOuDesativarUsuarioButton;
+    private javax.swing.JButton atualizarTabelaDescartesButton;
+    private javax.swing.JButton atualizarTabelaMateriaisButton;
     private javax.swing.JButton atualizarTabelaUsuariosButton;
     private javax.swing.JButton cadastrarCidadaoButton;
     private javax.swing.JPanel dashboardPanel;
@@ -1242,12 +1293,10 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JPanel dashboardTogglePanel;
     private javax.swing.JTable descartesTable;
     private javax.swing.JButton editarCidadaoButton;
-    private javax.swing.JButton editarDescarteButton;
     private javax.swing.JButton editarMaterialButton;
     private javax.swing.JButton editarMeusDadosDeLoginButton;
     private javax.swing.JButton editarMeusDadosPessoaisButton;
     private javax.swing.JButton excluirCidadãoButton;
-    private javax.swing.JButton excluirDescarteButton;
     private javax.swing.JButton excluirMaterialButton;
     private javax.swing.JButton excluirUsuarioButton;
     private javax.swing.JPanel gerenciarCidadaosPanel;
@@ -1274,9 +1323,9 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTable materiaisTable;
     private javax.swing.JPanel minhaContaPanel;
     private javax.swing.JLabel minhaContaToggleLabel;
     private javax.swing.JPanel minhaContaTogglePanel;

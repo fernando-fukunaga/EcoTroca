@@ -699,27 +699,31 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="47" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="760" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                      <Component id="novoDescarteButton" min="-2" pref="129" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="pesquisarDescarteButton" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="editarDescarteButton" min="-2" pref="147" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Component id="excluirDescarteButton" min="-2" pref="147" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="760" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
+                              <Component id="atualizarTabelaDescartesButton" min="-2" pref="163" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="43" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="novoDescarteButton" min="-2" pref="129" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="pesquisarDescarteButton" min="-2" pref="147" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel6" min="-2" pref="395" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -731,13 +735,13 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="pesquisarDescarteButton" alignment="3" pref="61" max="32767" attributes="0"/>
-                          <Component id="editarDescarteButton" alignment="3" pref="61" max="32767" attributes="0"/>
-                          <Component id="excluirDescarteButton" alignment="3" pref="61" max="32767" attributes="0"/>
                           <Component id="novoDescarteButton" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="391" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="255" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="atualizarTabelaDescartesButton" min="-2" pref="56" max="-2" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -751,11 +755,11 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="0">
-                        <Column editable="true" title="ID do descarte" type="java.lang.Integer"/>
-                        <Column editable="true" title="ID do cidad&#xe3;o" type="java.lang.Integer"/>
-                        <Column editable="true" title="Nome do cidad&#xe3;o" type="java.lang.String"/>
-                        <Column editable="true" title="Login do funcion&#xe1;rio" type="java.lang.String"/>
-                        <Column editable="true" title="Data e hora do descarte" type="java.lang.String"/>
+                        <Column editable="false" title="ID do descarte" type="java.lang.Integer"/>
+                        <Column editable="false" title="ID do cidad&#xe3;o" type="java.lang.Integer"/>
+                        <Column editable="false" title="Nome do cidad&#xe3;o" type="java.lang.String"/>
+                        <Column editable="false" title="Login do funcion&#xe1;rio" type="java.lang.String"/>
+                        <Column editable="false" title="Data e hora do descarte" type="java.lang.String"/>
                         <Column editable="false" title="Peso total do descarte (kg)" type="java.lang.Double"/>
                       </Table>
                     </Property>
@@ -827,22 +831,17 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pesquisar Descarte"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesquisarDescarteButtonActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="editarDescarteButton">
+            <Component class="javax.swing.JButton" name="atualizarTabelaDescartesButton">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="17" green="94" red="c2" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Editar Descarte"/>
+                <Property name="text" type="java.lang.String" value="Atualizar tabela"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="excluirDescarteButton">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="17" green="17" red="c2" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Excluir Descarte"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atualizarTabelaDescartesButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1062,7 +1061,7 @@
                               <Component id="jLabel8" min="-2" pref="402" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                               <Component id="novoMaterialButton" min="-2" pref="129" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                               <Component id="pesquisarMaterialButton" min="-2" pref="147" max="-2" attributes="0"/>
@@ -1070,6 +1069,10 @@
                               <Component id="editarMaterialButton" min="-2" pref="147" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="excluirMaterialButton" min="-2" pref="147" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="334" max="-2" attributes="0"/>
+                              <Component id="atualizarTabelaMateriaisButton" min="-2" pref="163" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="41" max="32767" attributes="0"/>
@@ -1081,23 +1084,18 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" pref="44" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" min="-2" pref="405" max="-2" attributes="0"/>
-                              <EmptySpace pref="29" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="novoMaterialButton" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
-                                  <Component id="pesquisarMaterialButton" alignment="3" pref="61" max="32767" attributes="0"/>
-                                  <Component id="editarMaterialButton" alignment="3" pref="61" max="32767" attributes="0"/>
-                                  <Component id="excluirMaterialButton" alignment="3" pref="61" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="novoMaterialButton" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
+                          <Component id="pesquisarMaterialButton" alignment="3" pref="61" max="32767" attributes="0"/>
+                          <Component id="editarMaterialButton" alignment="3" pref="61" max="32767" attributes="0"/>
+                          <Component id="excluirMaterialButton" alignment="3" pref="61" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="316" max="-2" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <Component id="atualizarTabelaMateriaisButton" min="-2" pref="56" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1107,7 +1105,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="materiaisTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="0">
@@ -1188,6 +1186,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Excluir Material"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="atualizarTabelaMateriaisButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar tabela"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atualizarTabelaMateriaisButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

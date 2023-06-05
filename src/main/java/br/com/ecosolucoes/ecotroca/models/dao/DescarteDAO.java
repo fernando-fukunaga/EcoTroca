@@ -1,10 +1,17 @@
 package br.com.ecosolucoes.ecotroca.models.dao;
 
+import br.com.ecosolucoes.ecotroca.models.Cidadao;
 import br.com.ecosolucoes.ecotroca.models.Descarte;
+import br.com.ecosolucoes.ecotroca.models.Pessoa;
+import br.com.ecosolucoes.ecotroca.models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class DescarteDAO {
@@ -37,7 +44,7 @@ public class DescarteDAO {
                       
         }
 
-    public Descarte readDescarte(int id){
+    public static Descarte readDescarte(int id){
         String sql = "select * from descarte where id = ?";
         try(Connection conn = factory.obterConexao()){
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -46,10 +53,11 @@ public class DescarteDAO {
         if (rs.next()){
             int idCidadao = rs.getInt("id_cidadao");
             int idUsuario = rs.getInt("id_usuario");
+            Timestamp dataHoraDescarte = rs.getTimestamp("data_hora_descarte");
             double pesoTotalDescarte = rs.getDouble("peso_total_descarte");
             double totalPontosGerados = rs.getDouble("total_pontos_gerados");
             Descarte descarte = new Descarte();
-            descarte.setId(id);descarte.setIdCidadao(idCidadao);descarte.setIdUsuario(idUsuario);
+            descarte.setId(id);descarte.setIdCidadao(idCidadao);descarte.setIdUsuario(idUsuario);descarte.setDataHoraDescarte(dataHoraDescarte);
             descarte.setPesoTotalDescarte(pesoTotalDescarte);descarte.setTotalPontosGerados(totalPontosGerados);
             return descarte;
         
@@ -129,6 +137,42 @@ public class DescarteDAO {
              e.printStackTrace();
 }
     }
+           
+    public static ArrayList listarDescartesParaTabela(){
+        String sql = "select * from descarte";
+        try(Connection conn = factory.obterConexao()){
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Object[]> objetos = new ArrayList<>();
+        while (rs.next()){
+        int idDescarte = rs.getInt("id");
+        int idCidadao = rs.getInt("id_cidadao");
+        Cidadao cidadao = CidadaoDAO.readCidadao(idCidadao);
+        int idPessoa = cidadao.getIdPessoa();
+        Pessoa pessoa = PessoaDAO.readPessoa(idPessoa);
+        String nomeCidadao = pessoa.getNome()+" "+pessoa.getSobrenome();
+        int idUsuario = rs.getInt("id_usuario");
+        Usuario usuario = UsuarioDAO.readUsuario(idUsuario);
+        String loginFuncionario = usuario.getLogin();
+        Timestamp dataHoraDescarte = rs.getTimestamp("data_hora_descarte");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String strDataHoraDescarte = dateFormat.format(dataHoraDescarte);
+        Double pesoTotalDescarte = rs.getDouble("peso_total_descarte");
+        Object[] newRowData = {idDescarte,idCidadao,nomeCidadao,loginFuncionario,strDataHoraDescarte,pesoTotalDescarte};
+        objetos.add(newRowData);
+        }
+        return objetos;
+        }
+        
+        
+
+        catch (Exception e){
+           JOptionPane.showMessageDialog(null, "Ocorreu um erro de conexão"); 
+           e.printStackTrace();
+        }
+        return null;
+        
+        }           
     
 }
 
