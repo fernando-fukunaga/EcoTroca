@@ -1309,16 +1309,24 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="editarCidadaoButton" max="32767" attributes="0"/>
-                          <Component id="cadastrarCidadaoButton" min="-2" pref="147" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="excluirCidadãoButton" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="pesquisarCidadaoButton" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="editarCidadaoButton" max="32767" attributes="0"/>
+                                  <Component id="cadastrarCidadaoButton" min="-2" pref="147" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="excluirCidadãoButton" min="-2" pref="147" max="-2" attributes="0"/>
+                                  <Component id="pesquisarCidadaoButton" min="-2" pref="147" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" pref="417" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace pref="213" max="32767" attributes="0"/>
                   </Group>
@@ -1327,7 +1335,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cadastrarCidadaoButton" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
                           <Component id="pesquisarCidadaoButton" alignment="3" pref="61" max="32767" attributes="0"/>
@@ -1350,6 +1360,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cadastrar Cidad&#xe3;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarCidadaoButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="pesquisarCidadaoButton">
               <Properties>
@@ -1358,6 +1371,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pesquisar Cidad&#xe3;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesquisarCidadaoButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="editarCidadaoButton">
               <Properties>
@@ -1366,6 +1382,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Editar Cidad&#xe3;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarCidadaoButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="excluirCidad&#xe3;oButton">
               <Properties>
@@ -1373,6 +1392,18 @@
                   <Color blue="17" green="17" red="c2" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Excluir Cidad&#xe3;o"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirCidad&#xe3;oButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel9">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Verdana" size="24" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Gerenciamento de Cidad&#xe3;os"/>
               </Properties>
             </Component>
           </SubComponents>

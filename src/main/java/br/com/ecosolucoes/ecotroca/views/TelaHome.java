@@ -10,6 +10,10 @@ import br.com.ecosolucoes.ecotroca.views.usuario.TelaAtivarDesativarUsuario;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaPesquisarUsuario;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 import static br.com.ecosolucoes.ecotroca.views.TelaLogin.usuarioLogado;
+import br.com.ecosolucoes.ecotroca.views.cidadao.TelaAtualizarCidadao;
+import br.com.ecosolucoes.ecotroca.views.cidadao.TelaExcluirCidadao;
+import br.com.ecosolucoes.ecotroca.views.cidadao.TelaNovoCidadao;
+import br.com.ecosolucoes.ecotroca.views.cidadao.TelaPesquisarCidadao;
 import br.com.ecosolucoes.ecotroca.views.descarte.TelaNovoDescarte;
 import br.com.ecosolucoes.ecotroca.views.descarte.TelaPesquisarDescarte;
 import br.com.ecosolucoes.ecotroca.views.material.TelaEditarMaterial;
@@ -177,6 +181,7 @@ public class TelaHome extends javax.swing.JFrame {
         pesquisarCidadaoButton = new javax.swing.JButton();
         editarCidadaoButton = new javax.swing.JButton();
         excluirCidadãoButton = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1018, 593));
@@ -932,35 +937,66 @@ public class TelaHome extends javax.swing.JFrame {
 
         cadastrarCidadaoButton.setBackground(new java.awt.Color(50, 168, 82));
         cadastrarCidadaoButton.setText("Cadastrar Cidadão");
+        cadastrarCidadaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarCidadaoButtonActionPerformed(evt);
+            }
+        });
 
         pesquisarCidadaoButton.setBackground(new java.awt.Color(25, 110, 247));
         pesquisarCidadaoButton.setText("Pesquisar Cidadão");
+        pesquisarCidadaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisarCidadaoButtonActionPerformed(evt);
+            }
+        });
 
         editarCidadaoButton.setBackground(new java.awt.Color(194, 148, 23));
         editarCidadaoButton.setText("Editar Cidadão");
+        editarCidadaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarCidadaoButtonActionPerformed(evt);
+            }
+        });
 
         excluirCidadãoButton.setBackground(new java.awt.Color(194, 23, 23));
         excluirCidadãoButton.setText("Excluir Cidadão");
+        excluirCidadãoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluirCidadãoButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Gerenciamento de Cidadãos");
 
         javax.swing.GroupLayout gerenciarCidadaosPanelLayout = new javax.swing.GroupLayout(gerenciarCidadaosPanel);
         gerenciarCidadaosPanel.setLayout(gerenciarCidadaosPanelLayout);
         gerenciarCidadaosPanelLayout.setHorizontalGroup(
             gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gerenciarCidadaosPanelLayout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(editarCidadaoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cadastrarCidadaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(142, 142, 142)
                 .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(excluirCidadãoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pesquisarCidadaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(gerenciarCidadaosPanelLayout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(editarCidadaoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cadastrarCidadaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(142, 142, 142)
+                        .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(excluirCidadãoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pesquisarCidadaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(gerenciarCidadaosPanelLayout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(213, Short.MAX_VALUE))
         );
         gerenciarCidadaosPanelLayout.setVerticalGroup(
             gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gerenciarCidadaosPanelLayout.createSequentialGroup()
-                .addGap(163, 163, 163)
+                .addGap(75, 75, 75)
+                .addComponent(jLabel9)
+                .addGap(58, 58, 58)
                 .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cadastrarCidadaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pesquisarCidadaoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
@@ -1301,13 +1337,8 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void pesquisarMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarMaterialButtonActionPerformed
         // TODO add your handling code here:
-        if (usuarioLogado.getPerfilAcesso().name().equals("admin")) {
-            TelaPesquisarMaterial tpm = new TelaPesquisarMaterial();
-            tpm.setVisible(true);
-        }  
-        else {
-            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
-        }        
+        TelaPesquisarMaterial tpm = new TelaPesquisarMaterial();
+        tpm.setVisible(true);        
     }//GEN-LAST:event_pesquisarMaterialButtonActionPerformed
 
     private void editarMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarMaterialButtonActionPerformed
@@ -1331,6 +1362,35 @@ public class TelaHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
         }        
     }//GEN-LAST:event_excluirMaterialButtonActionPerformed
+
+    private void excluirCidadãoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirCidadãoButtonActionPerformed
+        // TODO add your handling code here:
+        if (usuarioLogado.getPerfilAcesso().name() == "admin") {
+            TelaExcluirCidadao tec = new TelaExcluirCidadao();
+            tec.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
+        }
+    }//GEN-LAST:event_excluirCidadãoButtonActionPerformed
+
+    private void cadastrarCidadaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCidadaoButtonActionPerformed
+        // TODO add your handling code here:
+        TelaNovoCidadao tnc = new TelaNovoCidadao();
+        tnc.setVisible(true);
+    }//GEN-LAST:event_cadastrarCidadaoButtonActionPerformed
+
+    private void pesquisarCidadaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarCidadaoButtonActionPerformed
+        // TODO add your handling code here:
+        TelaPesquisarCidadao tpc = new TelaPesquisarCidadao();
+        tpc.setVisible(true);
+    }//GEN-LAST:event_pesquisarCidadaoButtonActionPerformed
+
+    private void editarCidadaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCidadaoButtonActionPerformed
+        // TODO add your handling code here:
+        TelaAtualizarCidadao tac = new TelaAtualizarCidadao();
+        tac.setVisible(true);
+    }//GEN-LAST:event_editarCidadaoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1402,6 +1462,7 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

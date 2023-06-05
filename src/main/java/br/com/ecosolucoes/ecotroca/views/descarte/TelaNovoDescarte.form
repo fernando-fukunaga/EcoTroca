@@ -218,6 +218,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="registrarDescarteButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="52" green="a8" red="32" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Registrar Descarte"/>
       </Properties>
       <Events>

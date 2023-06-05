@@ -126,6 +126,7 @@ public class TelaNovoDescarte extends javax.swing.JFrame {
             }
         });
 
+        registrarDescarteButton.setBackground(new java.awt.Color(50, 168, 82));
         registrarDescarteButton.setText("Registrar Descarte");
         registrarDescarteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
