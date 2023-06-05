@@ -7,10 +7,13 @@ package br.com.ecosolucoes.ecotroca.views;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaAtivarDesativarUsuario;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaPesquisarUsuario;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
+import static br.com.ecosolucoes.ecotroca.views.TelaLogin.usuarioLogado;
 import br.com.ecosolucoes.ecotroca.views.usuario.TelaAlterarAcessoUsuario;
+import br.com.ecosolucoes.ecotroca.views.usuario.TelaExcluirUsuario;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +35,7 @@ public class TelaHome extends javax.swing.JFrame {
         gerenciarDescartesPanel.setVisible(false);
         gerenciarUsuariosPanel.setVisible(false);
         gerenciarMateriaisPanel.setVisible(false);
+        gerenciarCidadaosPanel.setVisible(false);
         minhaContaPanel.setVisible(false); 
         
         DefaultTableModel model = (DefaultTableModel) usuariosTable.getModel();
@@ -43,14 +47,14 @@ public class TelaHome extends javax.swing.JFrame {
     }
 
     public void deixaTodosOsPanelsInvisiveis() {
-        Component[] arrayPanels = {dashboardPanel,gerenciarDescartesPanel,gerenciarUsuariosPanel,gerenciarMateriaisPanel,minhaContaPanel};
+        Component[] arrayPanels = {dashboardPanel,gerenciarDescartesPanel,gerenciarUsuariosPanel,gerenciarMateriaisPanel,gerenciarCidadaosPanel,minhaContaPanel};
         for (Component component : arrayPanels) {
             component.setVisible(false);
         }
     }
     
     public void deixaTodosOsTogglesDoMenuNaCorPadrao() {
-        Component[] arrayToggles = {dashboardTogglePanel,gerenciarDescartesTogglePanel,gerenciarUsuariosTogglePanel,gerenciarMateriaisTogglePanel,minhaContaTogglePanel};
+        Component[] arrayToggles = {dashboardTogglePanel,gerenciarDescartesTogglePanel,gerenciarUsuariosTogglePanel,gerenciarMateriaisTogglePanel,gerenciarCidadaosTogglePanel,minhaContaTogglePanel};
         for (Component component : arrayToggles) {
             component.setBackground(sideMenuPanel.getBackground());
         }
@@ -87,6 +91,8 @@ public class TelaHome extends javax.swing.JFrame {
         gerenciarMateriaisToggleLabel = new javax.swing.JLabel();
         minhaContaTogglePanel = new javax.swing.JPanel();
         minhaContaToggleLabel = new javax.swing.JLabel();
+        gerenciarCidadaosTogglePanel = new javax.swing.JPanel();
+        gerenciarCidadaosToggleLabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         dashboardPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -124,6 +130,11 @@ public class TelaHome extends javax.swing.JFrame {
         editarMeusDadosPessoaisButton = new javax.swing.JButton();
         editarMeusDadosDeLoginButton = new javax.swing.JButton();
         sairButton = new javax.swing.JButton();
+        gerenciarCidadaosPanel = new javax.swing.JPanel();
+        cadastrarCidadaoButton = new javax.swing.JButton();
+        pesquisarCidadaoButton = new javax.swing.JButton();
+        editarCidadaoButton = new javax.swing.JButton();
+        excluirCidadãoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1018, 593));
@@ -310,7 +321,7 @@ public class TelaHome extends javax.swing.JFrame {
             minhaContaTogglePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, minhaContaTogglePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(minhaContaToggleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addComponent(minhaContaToggleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         minhaContaTogglePanelLayout.setVerticalGroup(
@@ -318,6 +329,40 @@ public class TelaHome extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, minhaContaTogglePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(minhaContaToggleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        gerenciarCidadaosTogglePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        gerenciarCidadaosTogglePanel.setPreferredSize(new java.awt.Dimension(150, 55));
+        gerenciarCidadaosTogglePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                gerenciarCidadaosTogglePanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                gerenciarCidadaosTogglePanelMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                gerenciarCidadaosTogglePanelMouseReleased(evt);
+            }
+        });
+
+        gerenciarCidadaosToggleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        gerenciarCidadaosToggleLabel.setText("Gerenciar Cidadãos");
+
+        javax.swing.GroupLayout gerenciarCidadaosTogglePanelLayout = new javax.swing.GroupLayout(gerenciarCidadaosTogglePanel);
+        gerenciarCidadaosTogglePanel.setLayout(gerenciarCidadaosTogglePanelLayout);
+        gerenciarCidadaosTogglePanelLayout.setHorizontalGroup(
+            gerenciarCidadaosTogglePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerenciarCidadaosTogglePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gerenciarCidadaosToggleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        gerenciarCidadaosTogglePanelLayout.setVerticalGroup(
+            gerenciarCidadaosTogglePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerenciarCidadaosTogglePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gerenciarCidadaosToggleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -332,7 +377,8 @@ public class TelaHome extends javax.swing.JFrame {
                     .addComponent(gerenciarDescartesTogglePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gerenciarUsuariosTogglePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gerenciarMateriaisTogglePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(minhaContaTogglePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(gerenciarCidadaosTogglePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(minhaContaTogglePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sideMenuPanelLayout.setVerticalGroup(
@@ -347,8 +393,10 @@ public class TelaHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gerenciarMateriaisTogglePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gerenciarCidadaosTogglePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(minhaContaTogglePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -765,6 +813,11 @@ public class TelaHome extends javax.swing.JFrame {
         editarMeusDadosDeLoginButton.setText("Editar meus dados de login");
 
         sairButton.setText("Sair");
+        sairButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout minhaContaPanelLayout = new javax.swing.GroupLayout(minhaContaPanel);
         minhaContaPanel.setLayout(minhaContaPanelLayout);
@@ -791,6 +844,50 @@ public class TelaHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sairButton)
                 .addContainerGap(174, Short.MAX_VALUE))
+        );
+
+        gerenciarCidadaosPanel.setMaximumSize(new java.awt.Dimension(850, 593));
+        gerenciarCidadaosPanel.setMinimumSize(new java.awt.Dimension(850, 593));
+
+        cadastrarCidadaoButton.setBackground(new java.awt.Color(50, 168, 82));
+        cadastrarCidadaoButton.setText("Cadastrar Cidadão");
+
+        pesquisarCidadaoButton.setBackground(new java.awt.Color(25, 110, 247));
+        pesquisarCidadaoButton.setText("Pesquisar Cidadão");
+
+        editarCidadaoButton.setBackground(new java.awt.Color(194, 148, 23));
+        editarCidadaoButton.setText("Editar Cidadão");
+
+        excluirCidadãoButton.setBackground(new java.awt.Color(194, 23, 23));
+        excluirCidadãoButton.setText("Excluir Cidadão");
+
+        javax.swing.GroupLayout gerenciarCidadaosPanelLayout = new javax.swing.GroupLayout(gerenciarCidadaosPanel);
+        gerenciarCidadaosPanel.setLayout(gerenciarCidadaosPanelLayout);
+        gerenciarCidadaosPanelLayout.setHorizontalGroup(
+            gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerenciarCidadaosPanelLayout.createSequentialGroup()
+                .addGap(201, 201, 201)
+                .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(editarCidadaoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cadastrarCidadaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(142, 142, 142)
+                .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(excluirCidadãoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesquisarCidadaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(213, Short.MAX_VALUE))
+        );
+        gerenciarCidadaosPanelLayout.setVerticalGroup(
+            gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerenciarCidadaosPanelLayout.createSequentialGroup()
+                .addGap(163, 163, 163)
+                .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cadastrarCidadaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesquisarCidadaoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                .addGap(113, 113, 113)
+                .addGroup(gerenciarCidadaosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editarCidadaoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(excluirCidadãoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                .addGap(195, 195, 195))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -823,6 +920,11 @@ public class TelaHome extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(minhaContaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(10, Short.MAX_VALUE)))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addComponent(gerenciarCidadaosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -852,6 +954,11 @@ public class TelaHome extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(minhaContaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addComponent(gerenciarCidadaosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1004,6 +1111,13 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void excluirUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirUsuarioButtonActionPerformed
         // TODO add your handling code here:
+        if (usuarioLogado.getPerfilAcesso().name().equals("admin")) {
+            TelaExcluirUsuario teu = new TelaExcluirUsuario();
+            teu.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
+        }
     }//GEN-LAST:event_excluirUsuarioButtonActionPerformed
 
     private void pesquisarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarUsuarioButtonActionPerformed
@@ -1014,8 +1128,13 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void ativarOuDesativarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ativarOuDesativarUsuarioButtonActionPerformed
         // TODO add your handling code here:
-        TelaAtivarDesativarUsuario tadu = new TelaAtivarDesativarUsuario();
-        tadu.setVisible(true);
+        if (usuarioLogado.getPerfilAcesso().name().equals("admin")) {
+            TelaAtivarDesativarUsuario tadu = new TelaAtivarDesativarUsuario();
+            tadu.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
+        }        
     }//GEN-LAST:event_ativarOuDesativarUsuarioButtonActionPerformed
 
     private void atualizarTabelaUsuariosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaUsuariosButtonActionPerformed
@@ -1025,9 +1144,46 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void alterarAcessoUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarAcessoUsuarioButtonActionPerformed
         // TODO add your handling code here:
-        TelaAlterarAcessoUsuario taau = new TelaAlterarAcessoUsuario();
-        taau.setVisible(true);
+        if (usuarioLogado.getPerfilAcesso().name().equals("admin")) {
+            TelaAlterarAcessoUsuario taau = new TelaAlterarAcessoUsuario();
+            taau.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Você não pode acessar essa funcionalidade!");
+        }        
     }//GEN-LAST:event_alterarAcessoUsuarioButtonActionPerformed
+
+    private void gerenciarCidadaosTogglePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarCidadaosTogglePanelMouseEntered
+        // TODO add your handling code here:
+        gerenciarCidadaosTogglePanel.setBackground(new Color(25, 110, 247));
+    }//GEN-LAST:event_gerenciarCidadaosTogglePanelMouseEntered
+
+    private void gerenciarCidadaosTogglePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarCidadaosTogglePanelMouseExited
+        // TODO add your handling code here:
+        if (!gerenciarCidadaosPanel.isVisible()) {
+            gerenciarCidadaosTogglePanel.setBackground(sideMenuPanel.getBackground());
+        }
+    }//GEN-LAST:event_gerenciarCidadaosTogglePanelMouseExited
+
+    private void gerenciarCidadaosTogglePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerenciarCidadaosTogglePanelMouseReleased
+        // TODO add your handling code here:
+        if (gerenciarCidadaosPanel.isVisible()) {
+            gerenciarCidadaosPanel.setVisible(false);
+        }
+        else {
+            deixaTodosOsPanelsInvisiveis();
+            deixaTodosOsTogglesDoMenuNaCorPadrao();           
+            gerenciarCidadaosPanel.setVisible(true);
+            gerenciarCidadaosTogglePanel.setBackground(new Color(25, 110, 247));
+        }        
+    }//GEN-LAST:event_gerenciarCidadaosTogglePanelMouseReleased
+
+    private void sairButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairButtonActionPerformed
+        // TODO add your handling code here:
+        TelaLogin tl = new TelaLogin();
+        tl.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_sairButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1069,17 +1225,23 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JButton alterarAcessoUsuarioButton;
     private javax.swing.JButton ativarOuDesativarUsuarioButton;
     private javax.swing.JButton atualizarTabelaUsuariosButton;
+    private javax.swing.JButton cadastrarCidadaoButton;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JLabel dashboardToggleLabel;
     private javax.swing.JPanel dashboardTogglePanel;
     private javax.swing.JTable descartesTable;
+    private javax.swing.JButton editarCidadaoButton;
     private javax.swing.JButton editarDescarteButton;
     private javax.swing.JButton editarMaterialButton;
     private javax.swing.JButton editarMeusDadosDeLoginButton;
     private javax.swing.JButton editarMeusDadosPessoaisButton;
+    private javax.swing.JButton excluirCidadãoButton;
     private javax.swing.JButton excluirDescarteButton;
     private javax.swing.JButton excluirMaterialButton;
     private javax.swing.JButton excluirUsuarioButton;
+    private javax.swing.JPanel gerenciarCidadaosPanel;
+    private javax.swing.JLabel gerenciarCidadaosToggleLabel;
+    private javax.swing.JPanel gerenciarCidadaosTogglePanel;
     private javax.swing.JPanel gerenciarDescartesPanel;
     private javax.swing.JLabel gerenciarDescartesToggleLabel;
     private javax.swing.JPanel gerenciarDescartesTogglePanel;
@@ -1109,6 +1271,7 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JPanel minhaContaTogglePanel;
     private javax.swing.JButton novoDescarteButton;
     private javax.swing.JButton novoMaterialButton;
+    private javax.swing.JButton pesquisarCidadaoButton;
     private javax.swing.JButton pesquisarDescarteButton;
     private javax.swing.JButton pesquisarMaterialButton;
     private javax.swing.JButton pesquisarUsuarioButton;

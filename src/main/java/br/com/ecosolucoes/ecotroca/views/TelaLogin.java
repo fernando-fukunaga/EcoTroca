@@ -4,6 +4,7 @@
  */
 package br.com.ecosolucoes.ecotroca.views;
 
+import br.com.ecosolucoes.ecotroca.models.Usuario;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 
 /**
@@ -20,6 +21,8 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    public static Usuario usuarioLogado;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,6 +148,8 @@ public class TelaLogin extends javax.swing.JFrame {
         String login = loginTextField.getText();
         String senha = new String(senhaPasswordField.getPassword());
         if (UsuarioDAO.tentarLogin(login, senha)) {
+            Usuario usuario = UsuarioDAO.buscarUsuarioPeloLogin(login);
+            usuarioLogado = usuario;
             TelaHome th = new TelaHome();
             th.setVisible(true);
             this.dispose();
