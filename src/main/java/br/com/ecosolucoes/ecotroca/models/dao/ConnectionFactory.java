@@ -1,11 +1,12 @@
-package br.com.ecosolucoes.ecotroca.controllers;
+package br.com.ecosolucoes.ecotroca.models.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConnectionFactory {
     private String user = "root";
-    private String senha = "";
+    private String senha = "senha";
     private String host = "localhost";
     private String porta = "3306";
     private String banco = "ecotroca";
@@ -17,8 +18,7 @@ public class ConnectionFactory {
         return c;
         }
         
-        catch (Exception e) {
-        e.printStackTrace();
+        catch (SQLException e) {
         return null;
         }
     }
