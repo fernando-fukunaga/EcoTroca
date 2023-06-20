@@ -30,7 +30,7 @@ public class MaterialDescarteDAO {
            double pontosGerados = materialDescarte.getPesoDescartado() / 0.100 * material.getPontuacaoMaterial();
            ps.setDouble(4,pontosGerados);
            ps.execute();
-           JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso");
+           System.out.println("MaterialDescarte criado com sucesso");
           
            
        }

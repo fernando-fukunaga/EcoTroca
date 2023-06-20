@@ -6,6 +6,7 @@ package br.com.ecosolucoes.ecotroca.views;
 
 import br.com.ecosolucoes.ecotroca.models.Usuario;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -20,6 +21,7 @@ public class TelaLogin extends javax.swing.JFrame {
         super("EcoTroca");
         initComponents();
         this.setLocationRelativeTo(null);
+        this.getRootPane().setDefaultButton(entrarButton1);
     }
     
     public static Usuario usuarioLogado;
@@ -147,7 +149,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void sairButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -170,7 +172,7 @@ public class TelaLogin extends javax.swing.JFrame {
             TelaHome th = new TelaHome();
             th.setVisible(true);
             this.dispose();
-        }
+        } 
     }//GEN-LAST:event_entrarButton1ActionPerformed
 
     /**
