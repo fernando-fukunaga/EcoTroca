@@ -19,7 +19,9 @@ import br.com.ecosolucoes.ecotroca.models.dao.PessoaDAO;
 import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 import static br.com.ecosolucoes.ecotroca.views.TelaLogin.usuarioLogado;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -215,15 +217,25 @@ public class TelaNovoDescarte extends javax.swing.JFrame {
     private void adicionarMaterialDescarteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarMaterialDescarteButtonActionPerformed
         // TODO add your handling code here:
         MaterialDescarte materialDescarte = new MaterialDescarte();
+        int idMaterial = Integer.parseInt(buscarMaterialPeloIdTextField.getText());
+        double pesoDescartado = Double.parseDouble(pesoDescartadoTextField.getText());
+        Material material = MaterialDAO.readMaterial(idMaterial);
+        
         materialDescarte.setIdDescarte(idDescarte);
-        materialDescarte.setIdMaterial(Integer.parseInt(buscarMaterialPeloIdTextField.getText()));
-        materialDescarte.setPesoDescartado(Double.parseDouble(pesoDescartadoTextField.getText()));
+        materialDescarte.setIdMaterial(idMaterial);
+        materialDescarte.setPesoDescartado(pesoDescartado);
+        materialDescarte.setPontosGerados(pesoDescartado / 0.1 * material.getPontuacaoMaterial());
         MaterialDescarteDAO.createMaterialDescarte(materialDescarte);
+        
+        DefaultTableModel modelMaterialDescarte = (DefaultTableModel) materialDescarteTable.getModel();
+        Object[] newRowData = {material.getTipoMaterial(), materialDescarte.getPesoDescartado(), materialDescarte.getPontosGerados()};
+        modelMaterialDescarte.addRow(newRowData);
     }//GEN-LAST:event_adicionarMaterialDescarteButtonActionPerformed
 
     private void registrarDescarteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarDescarteButtonActionPerformed
         // TODO add your handling code here:
         DescarteDAO.atualizarPesoEPontosDescarte(idDescarte);
+        this.dispose();
     }//GEN-LAST:event_registrarDescarteButtonActionPerformed
 
     /**
