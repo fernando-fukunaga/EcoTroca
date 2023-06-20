@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -142,38 +143,34 @@ public class DescarteDAO {
     public static ArrayList listarDescartesParaTabela(){
         String sql = "select * from descarte";
         try(Connection conn = factory.obterConexao()){
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        ArrayList<Object[]> objetos = new ArrayList<>();
-        while (rs.next()){
-        int idDescarte = rs.getInt("id");
-        int idCidadao = rs.getInt("id_cidadao");
-        Cidadao cidadao = CidadaoDAO.readCidadao(idCidadao);
-        int idPessoa = cidadao.getIdPessoa();
-        Pessoa pessoa = PessoaDAO.readPessoa(idPessoa);
-        String nomeCidadao = pessoa.getNome()+" "+pessoa.getSobrenome();
-        int idUsuario = rs.getInt("id_usuario");
-        Usuario usuario = UsuarioDAO.readUsuario(idUsuario);
-        String loginFuncionario = usuario.getLogin();
-        Timestamp dataHoraDescarte = rs.getTimestamp("data_hora_descarte");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String strDataHoraDescarte = dateFormat.format(dataHoraDescarte);
-        Double pesoTotalDescarte = rs.getDouble("peso_total_descarte");
-        Object[] newRowData = {idDescarte,idCidadao,nomeCidadao,loginFuncionario,strDataHoraDescarte,pesoTotalDescarte};
-        objetos.add(newRowData);
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Object[]> objetos = new ArrayList<>();
+            while (rs.next()){
+                int idDescarte = rs.getInt("id");
+                int idCidadao = rs.getInt("id_cidadao");
+                Cidadao cidadao = CidadaoDAO.readCidadao(idCidadao);
+                int idPessoa = cidadao.getIdPessoa();
+                Pessoa pessoa = PessoaDAO.readPessoa(idPessoa);
+                String nomeCidadao = pessoa.getNome()+" "+pessoa.getSobrenome();
+                int idUsuario = rs.getInt("id_usuario");
+                Usuario usuario = UsuarioDAO.readUsuario(idUsuario);
+                String loginFuncionario = usuario.getLogin();
+                Timestamp dataHoraDescarte = rs.getTimestamp("data_hora_descarte");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                String strDataHoraDescarte = dateFormat.format(dataHoraDescarte);
+                Double pesoTotalDescarte = rs.getDouble("peso_total_descarte");
+                Object[] newRowData = {idDescarte,idCidadao,nomeCidadao,loginFuncionario,strDataHoraDescarte,pesoTotalDescarte};
+                objetos.add(newRowData);
+            }
+            return objetos;
         }
-        return objetos;
-        }
-        
-        
-
         catch (Exception e){
            JOptionPane.showMessageDialog(null, "Ocorreu um erro de conexão"); 
            e.printStackTrace();
         }
-        return null;
-        
-        }
+        return null;  
+    }
     
     public static int extrairNumeroDescartes() {
         String sql = "select * from descarte;";
@@ -193,7 +190,7 @@ public class DescarteDAO {
         return 0;
     }
 
-    public static double extrairPesoTotalRecebido() {
+    public static String extrairPesoTotalRecebido() {
         String sql = "select * from descarte;";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -201,18 +198,19 @@ public class DescarteDAO {
             double peso = 0;
             while (rs.next()){
                 double p = rs.getDouble("peso_total_descarte");
-                peso += p;
+                peso += p;               
             }
-            return peso;
+            DecimalFormat df = new DecimalFormat("#.000");
+            return df.format(peso);
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
             e.printStackTrace();
         }
-        return 0;
+        return null;
     }    
     
-    public static double extrairTotalPontosGerados() {
+    public static String extrairTotalPontosGerados() {
         String sql = "select * from descarte;";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -222,13 +220,14 @@ public class DescarteDAO {
                 double p = rs.getDouble("total_pontos_gerados");
                 pontos += p;
             }
-            return pontos;
+            DecimalFormat df = new DecimalFormat("#.00");
+            return df.format(pontos);
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro interno! Tente novamente mais tarde.");
             e.printStackTrace();
         }
-        return 0;
+        return null;
     }    
     
 }
