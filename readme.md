@@ -21,6 +21,17 @@ O programa foi desenvolvido para ser utilizado pelos funcionários dos postos de
 
 Um usuário com perfil de funcionário, não terá acesso a todas as funcionalidades do sistema, ele está limitado apenas a consultas, como buscar dados de cidadãos cadastrados, registro de novos descartes, cadastro de cidadãos, e coisas do tipo. Ações mais extremas como excluir registros do banco, editar quantos pontos cada material dá para os cidadãos, apenas usuários com perfil de administrador podem realizar.
 
+# Quem desenvolveu esse programa?
+Conheça a equipe que modelou e desenvolveu o EcoTroca:
+
+## Equipe de modelagem
+| [<img src="https://media.licdn.com/dms/image/D4E03AQG9QGYN1EaMQQ/profile-displayphoto-shrink_800_800/0/1679526548898?e=1692835200&v=beta&t=201xG5fQ2v6wQV-s7Z7g1yJ1maH9ZtRXdHQqwkJqDqY" width=115><br><sub>Vinicius Gutierrez</sub>](https://www.linkedin.com/in/viniciusgutierrezduarte/) | [<img src="https://media.licdn.com/dms/image/C4D03AQF5tmlej-mb9w/profile-displayphoto-shrink_800_800/0/1646936554618?e=1692835200&v=beta&t=5mnt4iAOLE3bJskCtisqCp9EDcAqtT7YoIBGge6oa00" width=115><br><sub>Stephany Dantas</sub>](https://www.linkedin.com/in/stephany-dantas-508ab222a/) | [<img src="https://media.licdn.com/dms/image/D4D03AQE-_8zGGMP8VA/profile-displayphoto-shrink_800_800/0/1687277927356?e=1692835200&v=beta&t=5fchnCIpQLbvS4vl2zCSr5sdEag-iH-POspDiYvccBc" width=115><br><sub>Gabriela Vitoriano</sub>](https://www.linkedin.com/in/gabriela-vitoriano-58453b269/) | [<img src="https://media.licdn.com/dms/image/D4D03AQFsVKkZIBIRrQ/profile-displayphoto-shrink_200_200/0/1674528460415?e=1692835200&v=beta&t=F5DqikEyCav6KW5GtDw1XtD2m76uic4WioxNp25GaUU" width=115><br><sub>Paloma Lopes</sub>](https://www.linkedin.com/in/lspaloma/) |
+| :---: | :---: | :---: | :---: |
+
+## Equipe de desenvolvimento
+| [<img src="https://avatars.githubusercontent.com/u/112123011?s=400&u=22ad423853238139b7091769db66445e54a7e678&v=4" width=115><br><sub>Fernando Fukunaga</sub>](https://github.com/fernando-fukunaga) | [<img src="https://media.licdn.com/dms/image/C4D03AQFZ_jooEwe1Gg/profile-displayphoto-shrink_800_800/0/1663731376501?e=1692835200&v=beta&t=6mgLCudzOiZHX8PYwVviJlmUbW4zkvi7jRo-qF46RxA" width=115><br><sub>Sara Alves</sub>](https://www.linkedin.com/in/sara-alves-79a48224b/) | [<img src="https://media.licdn.com/dms/image/D5635AQHi8MrDWDhlMg/profile-framedphoto-shrink_200_200/0/1684362849157?e=1687921200&v=beta&t=nMtRvJZ3YoGdlNCmaAdM5c0M-SYXDHHF2utmyZGuIbo" width=115><br><sub>Gabriel Parra</sub>](https://www.linkedin.com/in/gabrielparrab/) |
+| :---: | :---: | :---: |
+
 # Como rodar esse programa em minha máquina?
 Para testar o EcoTroca em sua máquina você precisa ter instalado os seguintes programas:
 * Java Development Kit (JDK) versão 19 (se você tiver uma versão diferente, confira a sessão "Configurando o pom.xml").
@@ -53,3 +64,6 @@ Como descrito nos requisitos, você deve ter a versão 19 da JDK para rodar o pr
 
 ## Rodando o projeto
 Agora é só clicar em "run file" e você já conseguirá utilizar o nosso software em sua máquina :D
+
+# Documentos interessantes
+Na pasta /docs desse projeto, você poderá ver todos os documentos e desenhos que fizeram parte da modelagem do nosso software. Como por exemplo, documento de levantamento de requisitos, diagramas da UML, modelo conceitual de banco de dados, coisas do gênero. Vale a pena conferir!
