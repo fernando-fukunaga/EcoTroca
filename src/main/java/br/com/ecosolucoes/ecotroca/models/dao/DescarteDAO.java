@@ -121,8 +121,7 @@ public class DescarteDAO {
 }
        
            public static void atualizarPesoEPontosDescarte(int id) {
-        String sql = "update descarte set peso_total_descarte = ?, total_pontos_gerados = ?"
-+ "where id = ?";
+        String sql = "update descarte set peso_total_descarte = ?, total_pontos_gerados = ? where id = ?";
         try(Connection conn = factory.obterConexao()){
             PreparedStatement ps = conn.prepareStatement(sql);
             double pontos = MaterialDescarteDAO.calculaTotalPontosDescarte(id);

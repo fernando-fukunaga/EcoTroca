@@ -5,16 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-    private String user = "root";
-    private String senha = "senha";
-    private String host = "localhost";
-    private String porta = "3306";
-    private String banco = "ecotroca";
-    private String timezone = "&useTimezone=true&serverTimezone=America/Sao_Paulo";
+    private static final String user = "postgres";
+    private static final String senha = "senha";
+    private static final String host = "localhost";
+    private static final String porta = "5432";
+    private static final String banco = "ecotroca";
+    private static final String timezone = "&useTimezone=true&serverTimezone=America/Sao_Paulo";
     
     public Connection obterConexao() {
         try {
-        Connection c = DriverManager.getConnection("jdbc:mysql://"+host+":"+porta+"/"+banco+"?user="+user+"&password="+senha+timezone);
+        Connection c = DriverManager.getConnection("jdbc:postgresql://"+host+":"+porta+"/"+banco+"?user="+user+"&password="+senha+timezone);
         return c;
         }
         

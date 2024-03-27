@@ -56,4 +56,6 @@ dist/
 nbdist/
 .nb-gradle/
 
+### IntelliJ ###
+.idea
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,netbeans

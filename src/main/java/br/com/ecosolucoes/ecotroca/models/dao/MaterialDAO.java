@@ -36,7 +36,7 @@ public class MaterialDAO {
     }
     
     public static void updateMaterial (Material material) {
-        String sql = "update from material(tipo_material,descricao_material,pontuacao_material_a_cada_cem_gramas) values(?,?,?) where id = ?";
+        String sql = "UPDATE material SET tipo_material = ?, descricao_material = ?, pontuacao_material_a_cada_cem_gramas = ? WHERE id = ?";
         try(Connection conn = factory.obterConexao()){
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,material.getTipoMaterial());
