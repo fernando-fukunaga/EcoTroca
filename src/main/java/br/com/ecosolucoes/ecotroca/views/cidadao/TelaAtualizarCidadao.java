@@ -44,6 +44,7 @@ public class TelaAtualizarCidadao extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nomeTextField = new javax.swing.JTextField();
+        sobrenomeTextField = new javax.swing.JTextField();
         pontuacaoTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         telefoneTextField = new javax.swing.JTextField();
@@ -61,15 +62,12 @@ public class TelaAtualizarCidadao extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Insira abaixo um CPF para localizar registro (apenas números):");
 
-        nomeTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome Completo"));
+        nomeTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome"));
+
+        sobrenomeTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Sobrenome"));
 
         pontuacaoTextField.setEditable(false);
         pontuacaoTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Número de pontos"));
-        pontuacaoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pontuacaoTextFieldActionPerformed(evt);
-            }
-        });
 
         emailTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("E-mail"));
 
@@ -114,6 +112,7 @@ public class TelaAtualizarCidadao extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pontuacaoTextField)
                             .addComponent(nomeTextField)
+                            .addComponent(sobrenomeTextField)
                             .addComponent(emailTextField)
                             .addComponent(telefoneTextField)
                             .addComponent(cpfTextField)
@@ -144,6 +143,8 @@ public class TelaAtualizarCidadao extends javax.swing.JFrame {
                 .addComponent(pesquisarButton)
                 .addGap(30, 30, 30)
                 .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sobrenomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pontuacaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -192,7 +193,8 @@ public class TelaAtualizarCidadao extends javax.swing.JFrame {
         String cpf = pesquisaTextField.getText();
         Pessoa pessoa = PessoaDAO.procurarPessoaPeloCpf(cpf);
         Cidadao cidadao = CidadaoDAO.buscarCidadaoPeloIdPessoa(pessoa.getId());
-        nomeTextField.setText(pessoa.getNome()+" "+pessoa.getSobrenome());
+        nomeTextField.setText(pessoa.getNome());
+        sobrenomeTextField.setText(pessoa.getSobrenome());
         pontuacaoTextField.setText(String.valueOf(cidadao.getSaldoPontuacao()));
         emailTextField.setText(pessoa.getEmail());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -208,7 +210,7 @@ public class TelaAtualizarCidadao extends javax.swing.JFrame {
         String cpf = pesquisaTextField.getText();
         Pessoa pessoa = PessoaDAO.procurarPessoaPeloCpf(cpf);
         pessoa.setNome(nomeTextField.getText());
-        pessoa.setSobrenome(pontuacaoTextField.getText());
+        pessoa.setSobrenome(sobrenomeTextField.getText());
         pessoa.setEmail(emailTextField.getText());
         pessoa.setEndereco(enderecoTextArea.getText());
         pessoa.setTelefone(telefoneTextField.getText());
@@ -276,6 +278,7 @@ public class TelaAtualizarCidadao extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nomeTextField;
+    private javax.swing.JTextField sobrenomeTextField;
     private javax.swing.JTextField pesquisaTextField;
     private javax.swing.JButton pesquisarButton;
     private javax.swing.JTextField pontuacaoTextField;

@@ -162,6 +162,7 @@ public class PessoaDAO {
             }
             else {
                 JOptionPane.showMessageDialog(null, "Pessoa não encontrada!");
+                return null;
             }
 
         }

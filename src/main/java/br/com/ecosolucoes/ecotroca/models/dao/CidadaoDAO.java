@@ -110,6 +110,7 @@ public class CidadaoDAO {
         }
         else{
             JOptionPane.showMessageDialog(null,"Dados não encontrados");
+            return null;
             
         }
         }
