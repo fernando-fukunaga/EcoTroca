@@ -78,15 +78,17 @@ public class PessoaDAO {
     }
     
     public static void updatePessoa(Pessoa pessoa) {
-        String sql = "update pessoa set nome = ?, sobrenome = ?, email = ?, endereco = ?, telefone = ? where id = ?";
+        String sql = "update pessoa set nome = ?, sobrenome = ?, email = ?, data_nascimento = ?, endereco = ?, telefone = ?, cpf = ? where id = ?";
         try (Connection conn = factory.obterConexao()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, pessoa.getNome());
             ps.setString(2, pessoa.getSobrenome());
             ps.setString(3, pessoa.getEmail());
-            ps.setString(4, pessoa.getEndereco());
-            ps.setString(5, pessoa.getTelefone());
-            ps.setInt(6, pessoa.getId());
+            ps.setDate(4, pessoa.getDataNascimento());
+            ps.setString(5, pessoa.getEndereco());
+            ps.setString(6, pessoa.getTelefone());
+            ps.setString(7, pessoa.getCpf());
+            ps.setInt(8, pessoa.getId());
             ps.execute();
             JOptionPane.showMessageDialog(null,"Pessoa atualizada com sucesso!");
         }

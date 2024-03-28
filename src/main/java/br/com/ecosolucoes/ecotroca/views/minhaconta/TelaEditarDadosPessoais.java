@@ -4,22 +4,12 @@
  */
 package br.com.ecosolucoes.ecotroca.views.minhaconta;
 
-import br.com.ecosolucoes.ecotroca.views.cidadao.*;
-import br.com.ecosolucoes.ecotroca.models.Cidadao;
-import br.com.ecosolucoes.ecotroca.views.*;
 import br.com.ecosolucoes.ecotroca.models.Pessoa;
-import br.com.ecosolucoes.ecotroca.models.Usuario;
-import br.com.ecosolucoes.ecotroca.models.Usuario.Perfil;
-import br.com.ecosolucoes.ecotroca.models.dao.CidadaoDAO;
 import br.com.ecosolucoes.ecotroca.models.dao.PessoaDAO;
-import br.com.ecosolucoes.ecotroca.models.dao.UsuarioDAO;
 import static br.com.ecosolucoes.ecotroca.views.TelaLogin.usuarioLogado;
+
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -77,11 +67,6 @@ public class TelaEditarDadosPessoais extends javax.swing.JFrame {
         nomeTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome"));
 
         sobrenomeTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Sobrenome"));
-        sobrenomeTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sobrenomeTextFieldActionPerformed(evt);
-            }
-        });
 
         emailTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("E-mail"));
 
@@ -168,16 +153,15 @@ public class TelaEditarDadosPessoais extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sobrenomeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobrenomeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sobrenomeTextFieldActionPerformed
-
     private void alterarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarButtonActionPerformed
         // TODO add your handling code here:
         Pessoa pessoa = PessoaDAO.readPessoa(usuarioLogado.getId());
         pessoa.setNome(nomeTextField.getText());
         pessoa.setSobrenome(sobrenomeTextField.getText());
         pessoa.setEmail(emailTextField.getText());
+        String dataNascimentoStr = formataStringDataSql(dataTextField.getText());
+        Date dataNascimento = Date.valueOf(dataNascimentoStr);
+        pessoa.setDataNascimento(dataNascimento);
         pessoa.setEndereco(enderecoTextArea.getText());
         pessoa.setTelefone(telefoneTextField.getText());
         pessoa.setCpf(cpfTextField.getText());
@@ -248,6 +232,20 @@ public class TelaEditarDadosPessoais extends javax.swing.JFrame {
                 new TelaEditarDadosPessoais().setVisible(true);
             }
         });
+    }
+
+    /**
+     * Method that receives a string of a date in brazilian format and converts it
+     * to a string that the method java.sql.Date.valueOf understands, in order to
+     * get a sql.Date object.
+     */
+    public String formataStringDataSql (String dataBrasil) {
+        String ano = dataBrasil.substring(6, 10);
+        String mes = dataBrasil.substring(3, 5);
+        String dia = dataBrasil.substring(0, 2);
+
+        String formatada = String.format("%s-%s-%s", ano, mes, dia);
+        return formatada;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
