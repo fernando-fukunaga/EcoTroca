@@ -166,6 +166,7 @@ public class TelaEditarDadosPessoais extends javax.swing.JFrame {
         pessoa.setTelefone(telefoneTextField.getText());
         pessoa.setCpf(cpfTextField.getText());
         PessoaDAO.updatePessoa(pessoa);
+        this.setVisible(false);
     }//GEN-LAST:event_alterarButtonActionPerformed
 
     /**
